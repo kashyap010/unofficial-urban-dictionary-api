@@ -10,7 +10,7 @@ function setupRoutes(app) {
 		});
 	});
 
-	app.get("/define/:word", defineController);
+	app.get("/define", defineController);
 
 	// app.get('/random', defineController);
 

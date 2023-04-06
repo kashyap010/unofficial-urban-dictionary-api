@@ -1,5 +1,6 @@
 function validateQueryParams(params) {
 	const validParams = {
+		term: (value) => value.trim().length > 0,
 		strict: (value) => value === "true" || value === "false",
 		limit: (value) => value === "none" || (!isNaN(value) && value > 0),
 		matchCase: (value) => value === "true" || value === "false",
