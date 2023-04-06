@@ -1,7 +1,8 @@
 function validateQueryParams(params) {
 	const validParams = {
 		strict: (value) => value === "true" || value === "false",
-		limit: (value) => !isNaN(value) && value > 0,
+		limit: (value) => value === "none" || (!isNaN(value) && value > 0),
+		matchCase: (value) => value === "true" || value === "false",
 	};
 
 	for (const [param, value] of Object.entries(params)) {

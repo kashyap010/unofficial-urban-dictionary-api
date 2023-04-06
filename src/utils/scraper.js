@@ -17,7 +17,7 @@ function extractDetails($, el) {
 	};
 }
 
-async function scraper(term, { strict, limit }) {
+async function scraper(term, { strict, limit, matchCase }) {
 	try {
 		const baseUrl = `https://www.urbandictionary.com/define.php?term=${term}`;
 		const { data: html } = await axios.get(baseUrl, { validateStatus: false });
@@ -25,9 +25,6 @@ async function scraper(term, { strict, limit }) {
 
 		if (!$(".definition").length) return [];
 
-		// const totalPages = minMax(
-		// 	$(".pagination").children().first().children().length
-		// );
 		const totalPages =
 			$(".pagination").children().first().children().length || 1;
 
@@ -40,11 +37,11 @@ async function scraper(term, { strict, limit }) {
 
 			const $definitions = $(".definition");
 			$definitions.each((idx, el) => {
-				if (
-					$(el).find(".word").prop("innerText").toLowerCase() !=
-					term.toLowerCase()
-				)
+				const word = $(el).find(".word").prop("innerText");
+				if (JSON.parse(strict) && word.toLowerCase() != term.toLowerCase())
 					return;
+				else if (JSON.parse(matchCase) && word != term) return;
+
 				const defn = extractDetails($, el);
 				console.log(defn);
 				defns.push(defn);

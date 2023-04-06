@@ -3,16 +3,16 @@ const validateQueryParams = require("../utils/validateQueryParams");
 
 async function defineController(req, res, next) {
 	const { word } = req.params;
-	const { strict = false, limit = "none" } = req.query;
+	const { strict = "false", limit = "none", matchCase = "false" } = req.query;
 
-	const validationResult = validateQueryParams({ strict, limit, page });
+	const validationResult = validateQueryParams({ strict, limit, matchCase });
 	if (!validationResult.valid) {
 		return res.status(400).json({
 			error: validationResult.message,
 		});
 	}
 
-	const meanings = await scraper(word, { strict, limit });
+	const meanings = await scraper(word, { strict, limit, matchCase });
 	if (!meanings.length)
 		return res.status(404).json({
 			word: word,
