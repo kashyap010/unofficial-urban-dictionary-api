@@ -1,11 +1,5 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
-// const pretty = require("pretty");
-
-function minMax(value) {
-	const max = 2; // adjust depending on how many pages you want to scrape data from
-	return Math.min(Math.max(value, 1), max);
-}
 
 function extractDetails($, el) {
 	return {
@@ -43,8 +37,10 @@ async function scraper(term, { strict, limit, matchCase }) {
 				else if (JSON.parse(matchCase) && word != term) return;
 
 				const defn = extractDetails($, el);
-				console.log(defn);
+				// console.log(defn);
 				defns.push(defn);
+
+				if (limit !== "none" && defns.length === parseInt(limit)) return false;
 			});
 		}
 		return defns.length ? defns : [];
