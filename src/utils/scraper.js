@@ -11,10 +11,15 @@ function extractDetails($, el) {
 	};
 }
 
-async function scraper(term, { strict, limit, matchCase }) {
+async function scraper(
+	path,
+	{ term = undefined, strict, limit, matchCase } = {}
+) {
 	try {
-		const baseUrl = `https://www.urbandictionary.com/define.php?term=${term}`;
-		const { data: html } = await axios.get(baseUrl, { validateStatus: false });
+		// optimise it, avoid extra calls
+		const fixedUrl =
+			`https://www.urbandictionary.com/${path}` + (term ? `?term=${term}` : "");
+		const { data: html } = await axios.get(fixedUrl, { validateStatus: false });
 		const $ = cheerio.load(html);
 
 		if (!$(".definition").length) return [];
@@ -24,7 +29,7 @@ async function scraper(term, { strict, limit, matchCase }) {
 
 		const defns = [];
 		for (let i = 1; i <= totalPages; i++) {
-			const url = baseUrl + (i > 1 ? `&page=${i}` : "");
+			const url = fixedUrl + (i > 1 ? `&page=${i}` : "");
 			const { data: html } = await axios.get(url);
 
 			const $ = cheerio.load(html);
