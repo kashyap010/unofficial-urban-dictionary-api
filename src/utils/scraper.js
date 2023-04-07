@@ -23,8 +23,8 @@ async function scraper(
 		else if (scrapeType === "browse")
 			fixedUrl = `${baseUrl}/${path}?character=${character}`;
 
-		const { data: html } = await axios.get(fixedUrl, { validateStatus: false });
-		const $ = cheerio.load(html);
+		let { data: html } = await axios.get(fixedUrl, { validateStatus: false });
+		let $ = cheerio.load(html);
 
 		if (scrapeType === "search" && !$(".definition").length) return [];
 
@@ -34,10 +34,11 @@ async function scraper(
 		const words = [];
 		let breakLoop = false;
 		for (let i = 1; i <= maxPages; i++) {
-			const url = fixedUrl + (i > 1 ? `&page=${i}` : "");
-			const { data: html } = await axios.get(url);
-
-			const $ = cheerio.load(html);
+			if (i > 1) {
+				const url = fixedUrl + `&page=${i}`;
+				({ data: html } = await axios.get(url));
+				$ = cheerio.load(html);
+			}
 
 			if (scrapeType === "search") {
 				const $definitions = $(".definition");
