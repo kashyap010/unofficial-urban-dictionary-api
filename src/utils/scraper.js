@@ -32,6 +32,7 @@ async function scraper(
 
 		const defns = [];
 		const words = [];
+		let breakLoop = false;
 		for (let i = 1; i <= maxPages; i++) {
 			const url = fixedUrl + (i > 1 ? `&page=${i}` : "");
 			const { data: html } = await axios.get(url);
@@ -49,8 +50,10 @@ async function scraper(
 					const defn = extractDetails($, el);
 					defns.push(defn);
 
-					if (limit !== "none" && defns.length === parseInt(limit))
+					if (limit !== "none" && defns.length === parseInt(limit)) {
+						breakLoop = true;
 						return false;
+					}
 				});
 			} else if (scrapeType === "browse") {
 				const $ul = $("main").find("ul").first().children("li");
@@ -58,10 +61,13 @@ async function scraper(
 					const word = $(li).find("a").text();
 					words.push(word);
 
-					if (limit !== "none" && words.length === parseInt(limit))
+					if (limit !== "none" && words.length === parseInt(limit)) {
+						breakLoop = true;
 						return false;
+					}
 				});
 			}
+			if (breakLoop) break;
 		}
 		if (scrapeType === "search") return defns.length ? defns : [];
 		return words.length ? words : [];
