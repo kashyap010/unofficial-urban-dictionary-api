@@ -1,4 +1,5 @@
 const scraper = require("../utils/scraper");
+const getYesterdayDate = require("../utils/getYesterdayDate");
 const validateQueryParams = require("../utils/validateQueryParams");
 
 async function searchController(req, res, next) {
@@ -75,4 +76,50 @@ async function randomController(req, res) {
 	});
 }
 
-module.exports = { searchController, randomController };
+async function browseController(req, res) {
+	let character = req.query.character;
+	const { strict = "false", limit = "none", matchCase = "false" } = req.query;
+
+	if (!character)
+		return res.status(400).json({
+			error: "Bad request",
+			message: "Character query parameter is required",
+		});
+
+	const validationResult = validateQueryParams({
+		character,
+		strict,
+		limit,
+		matchCase,
+	});
+	if (!validationResult.valid)
+		return res.status(400).json({
+			error: "Bad request",
+			message: validationResult.message,
+		});
+
+	const scrapeType = "browse";
+	const path = character === "new" ? "yesterday.php" : "browse.php";
+	character = character === "new" ? getYesterdayDate() : character;
+
+	const meanings = await scraper(path, {
+		character,
+		strict,
+		limit,
+		matchCase,
+		scrapeType,
+	});
+	if (!meanings.length)
+		return res.status(404).json({
+			found: false,
+			character: character,
+			message: "No words found for this character",
+		});
+	res.status(200).json({
+		found: true,
+		character: character,
+		definitions: meanings,
+	});
+}
+
+module.exports = { searchController, randomController, browseController };

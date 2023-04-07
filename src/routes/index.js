@@ -1,4 +1,8 @@
-const { searchController, randomController } = require("../controllers");
+const {
+	searchController,
+	randomController,
+	browseController,
+} = require("../controllers");
 
 function setupRoutes(app) {
 	// Root endpoint
@@ -14,9 +18,7 @@ function setupRoutes(app) {
 
 	app.get("/random", randomController);
 
-	// app.get('/browse/:category', defineController);
-
-	// app.get('/search', defineController);
+	app.get("/browse", browseController);
 }
 
 module.exports = setupRoutes;

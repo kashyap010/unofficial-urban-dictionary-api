@@ -13,42 +13,58 @@ function extractDetails($, el) {
 
 async function scraper(
 	path,
-	{ term = undefined, strict, limit, matchCase } = {}
+	{ term, strict, limit, matchCase, character, scrapeType = "search" } = {}
 ) {
 	try {
-		// optimise it, avoid extra calls
-		const fixedUrl =
-			`https://www.urbandictionary.com/${path}` + (term ? `?term=${term}` : "");
+		const baseUrl = "https://www.urbandictionary.com/";
+		let fixedUrl;
+		if (scrapeType === "search")
+			fixedUrl = `${baseUrl}/${path}` + (term ? `?term=${term}` : "");
+		else if (scrapeType === "browse")
+			fixedUrl = `${baseUrl}/${path}?character=${character}`;
+
 		const { data: html } = await axios.get(fixedUrl, { validateStatus: false });
 		const $ = cheerio.load(html);
 
-		if (!$(".definition").length) return [];
+		if (scrapeType === "search" && !$(".definition").length) return [];
 
-		const totalPages =
-			$(".pagination").children().first().children().length || 1;
+		const maxPages = $(".pagination").children().first().children().length || 1;
 
 		const defns = [];
-		for (let i = 1; i <= totalPages; i++) {
+		const words = [];
+		for (let i = 1; i <= maxPages; i++) {
 			const url = fixedUrl + (i > 1 ? `&page=${i}` : "");
 			const { data: html } = await axios.get(url);
 
 			const $ = cheerio.load(html);
 
-			const $definitions = $(".definition");
-			$definitions.each((idx, el) => {
-				const word = $(el).find(".word").prop("innerText");
-				if (JSON.parse(strict) && word.toLowerCase() != term.toLowerCase())
-					return;
-				else if (JSON.parse(matchCase) && word != term) return;
+			if (scrapeType === "search") {
+				const $definitions = $(".definition");
+				$definitions.each((idx, el) => {
+					const word = $(el).find(".word").prop("innerText");
+					if (JSON.parse(strict) && word.toLowerCase() != term.toLowerCase())
+						return;
+					else if (JSON.parse(matchCase) && word != term) return;
 
-				const defn = extractDetails($, el);
-				// console.log(defn);
-				defns.push(defn);
+					const defn = extractDetails($, el);
+					defns.push(defn);
 
-				if (limit !== "none" && defns.length === parseInt(limit)) return false;
-			});
+					if (limit !== "none" && defns.length === parseInt(limit))
+						return false;
+				});
+			} else if (scrapeType === "browse") {
+				const $ul = $("main").find("ul").first().children("li");
+				$ul.each((idx, li) => {
+					const word = $(li).find("a").text();
+					words.push(word);
+
+					if (limit !== "none" && words.length === parseInt(limit))
+						return false;
+				});
+			}
 		}
-		return defns.length ? defns : [];
+		if (scrapeType === "search") return defns.length ? defns : [];
+		return words.length ? words : [];
 	} catch (e) {
 		console.log("Scraping error", e);
 		return e;
@@ -56,5 +72,3 @@ async function scraper(
 }
 
 module.exports = scraper;
-
-// scraper("oolala");
