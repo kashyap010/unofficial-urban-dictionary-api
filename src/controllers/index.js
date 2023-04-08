@@ -59,6 +59,7 @@ async function randomController(req, res) {
 		limit = "none",
 		matchCase = "false",
 		page = "1",
+		multiPage = "false",
 	} = req.query;
 
 	const validationResult = validateQueryParams({
@@ -66,6 +67,7 @@ async function randomController(req, res) {
 		limit,
 		matchCase,
 		page,
+		multiPage,
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
@@ -78,6 +80,7 @@ async function randomController(req, res) {
 		limit,
 		matchCase,
 		page,
+		multiPage,
 	});
 	if (!meanings.length)
 		return res.status(404).json({
@@ -96,6 +99,7 @@ async function browseController(req, res) {
 		limit = "none",
 		matchCase = "false",
 		page = "1",
+		multiPage = "false",
 	} = req.query;
 
 	if (!character)
@@ -110,6 +114,7 @@ async function browseController(req, res) {
 		limit,
 		matchCase,
 		page,
+		multiPage,
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
@@ -128,6 +133,7 @@ async function browseController(req, res) {
 		matchCase,
 		scrapeType,
 		page,
+		multiPage,
 	});
 	if (!meanings.length)
 		return res.status(404).json({
