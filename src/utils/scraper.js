@@ -28,6 +28,15 @@ async function scraper(
 
 		if (scrapeType === "search" && !$(".definition").length) return [];
 
+		if (scrapeType === "search") {
+			const firstWord = $(".definition")
+				.first()
+				.find(".word")
+				.prop("innerText");
+			if (firstWord !== term && JSON.parse(matchCase)) return [];
+			else if (firstWord !== term) term = firstWord;
+		}
+
 		const maxPages = $(".pagination").children().first().children().length || 1;
 
 		const defns = [];
@@ -35,7 +44,8 @@ async function scraper(
 		let breakLoop = false;
 		for (let i = 1; i <= maxPages; i++) {
 			if (i > 1) {
-				const url = fixedUrl + `&page=${i}`;
+				const url =
+					`${baseUrl}/${path}` + (term ? `?term=${term}` : "") + `&page=${2}`;
 				({ data: html } = await axios.get(url));
 				$ = cheerio.load(html);
 			}
