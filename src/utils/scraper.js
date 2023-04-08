@@ -21,6 +21,7 @@ async function scraper(
 		character,
 		scrapeType = "search",
 		page,
+		multiPage,
 	} = {}
 ) {
 	try {
@@ -45,13 +46,23 @@ async function scraper(
 			else if (firstWord !== term) term = firstWord;
 		}
 
-		// const maxPages = $(".pagination").children().first().children().length || 1;
+		let currentPage, maxPage;
+		if (page !== "false") {
+			[currentPage, maxPage] =
+				multiPage === "false"
+					? [page, page].map((i) => parseInt(i))
+					: multiPage.split("-").map((i) => parseInt(i)); // single page : override
+		} else {
+			[currentPage, maxPage] =
+				multiPage === "false"
+					? [1, 5]
+					: multiPage.split("-").map((i) => parseInt(i)); // default 5 pages : user entered pages
+		}
 
 		const defns = [];
 		const words = [];
 		let breakLoop = false;
-		let currentPage = page;
-		while (true) {
+		while (currentPage <= maxPage) {
 			if (currentPage > 1) {
 				const url =
 					`${baseUrl}/${path}` +
@@ -89,12 +100,14 @@ async function scraper(
 					}
 				});
 			}
-			if (breakLoop || currentPage === page) break;
+			if (breakLoop) break;
+
+			currentPage++;
 		}
 		if (scrapeType === "search") return defns.length ? defns : [];
 		return words.length ? words : [];
 	} catch (e) {
-		console.log("Scraping error", e);
+		console.log("Scraping error\n", e);
 		return e;
 	}
 }

@@ -9,6 +9,7 @@ async function searchController(req, res, next) {
 		limit = "none",
 		matchCase = "false",
 		page = "1",
+		multiPage = "false",
 	} = req.query;
 
 	if (!term)
@@ -23,6 +24,7 @@ async function searchController(req, res, next) {
 		limit,
 		matchCase,
 		page,
+		multiPage,
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
@@ -36,6 +38,7 @@ async function searchController(req, res, next) {
 		limit,
 		matchCase,
 		page,
+		multiPage,
 	});
 	if (!meanings.length)
 		return res.status(404).json({
