@@ -13,7 +13,15 @@ function extractDetails($, el) {
 
 async function scraper(
 	path,
-	{ term, strict, limit, matchCase, character, scrapeType = "search" } = {}
+	{
+		term,
+		strict,
+		limit,
+		matchCase,
+		character,
+		scrapeType = "search",
+		page,
+	} = {}
 ) {
 	try {
 		const baseUrl = "https://www.urbandictionary.com/";
@@ -37,15 +45,18 @@ async function scraper(
 			else if (firstWord !== term) term = firstWord;
 		}
 
-		const maxPages = $(".pagination").children().first().children().length || 1;
+		// const maxPages = $(".pagination").children().first().children().length || 1;
 
 		const defns = [];
 		const words = [];
 		let breakLoop = false;
-		for (let i = 1; i <= maxPages; i++) {
-			if (i > 1) {
+		let currentPage = page;
+		while (true) {
+			if (currentPage > 1) {
 				const url =
-					`${baseUrl}/${path}` + (term ? `?term=${term}` : "") + `&page=${2}`;
+					`${baseUrl}/${path}` +
+					(term ? `?term=${term}` : "") +
+					`&page=${currentPage}`;
 				({ data: html } = await axios.get(url));
 				$ = cheerio.load(html);
 			}
@@ -78,7 +89,7 @@ async function scraper(
 					}
 				});
 			}
-			if (breakLoop) break;
+			if (breakLoop || currentPage === page) break;
 		}
 		if (scrapeType === "search") return defns.length ? defns : [];
 		return words.length ? words : [];

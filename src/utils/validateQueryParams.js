@@ -5,6 +5,7 @@ function validateQueryParams(params) {
 		limit: (value) => value === "none" || (!isNaN(value) && value > 0),
 		matchCase: (value) => value === "true" || value === "false",
 		character: (value) => /^([A-Z*]|new)$/.test(value),
+		page: (value) => (!isNaN(value) && value >= 1) || value === "false",
 	};
 
 	for (const [param, value] of Object.entries(params)) {

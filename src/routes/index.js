@@ -5,7 +5,6 @@ const {
 } = require("../controllers");
 
 function setupRoutes(app) {
-	// Root endpoint
 	app.get("/", (req, res) => {
 		res.status(200).json({
 			status: 200,

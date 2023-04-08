@@ -8,6 +8,7 @@ async function searchController(req, res, next) {
 		strict = "false",
 		limit = "none",
 		matchCase = "false",
+		page = "1",
 	} = req.query;
 
 	if (!term)
@@ -21,6 +22,7 @@ async function searchController(req, res, next) {
 		strict,
 		limit,
 		matchCase,
+		page,
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
@@ -33,6 +35,7 @@ async function searchController(req, res, next) {
 		strict,
 		limit,
 		matchCase,
+		page,
 	});
 	if (!meanings.length)
 		return res.status(404).json({
@@ -48,12 +51,18 @@ async function searchController(req, res, next) {
 }
 
 async function randomController(req, res) {
-	const { strict = "false", limit = "none", matchCase = "false" } = req.query;
+	const {
+		strict = "false",
+		limit = "none",
+		matchCase = "false",
+		page = "1",
+	} = req.query;
 
 	const validationResult = validateQueryParams({
 		strict,
 		limit,
 		matchCase,
+		page,
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
@@ -65,6 +74,7 @@ async function randomController(req, res) {
 		strict,
 		limit,
 		matchCase,
+		page,
 	});
 	if (!meanings.length)
 		return res.status(404).json({
@@ -78,7 +88,12 @@ async function randomController(req, res) {
 
 async function browseController(req, res) {
 	let character = req.query.character;
-	const { strict = "false", limit = "none", matchCase = "false" } = req.query;
+	const {
+		strict = "false",
+		limit = "none",
+		matchCase = "false",
+		page = "1",
+	} = req.query;
 
 	if (!character)
 		return res.status(400).json({
@@ -91,6 +106,7 @@ async function browseController(req, res) {
 		strict,
 		limit,
 		matchCase,
+		page,
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
@@ -108,6 +124,7 @@ async function browseController(req, res) {
 		limit,
 		matchCase,
 		scrapeType,
+		page,
 	});
 	if (!meanings.length)
 		return res.status(404).json({
