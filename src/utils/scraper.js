@@ -68,7 +68,7 @@ async function scraper(
 					`${baseUrl}/${path}` +
 					(term ? `?term=${term}` : "") +
 					`&page=${currentPage}`;
-				({ data: html } = await axios.get(url));
+				({ data: html } = await axios.get(url, { validateStatus: false }));
 				$ = cheerio.load(html);
 			}
 
@@ -83,7 +83,10 @@ async function scraper(
 					const defn = extractDetails($, el);
 					defns.push(defn);
 
-					if (limit !== "none" && defns.length === parseInt(limit)) {
+					if (
+						(limit !== "none" && defns.length === parseInt(limit)) ||
+						!$definitions.length
+					) {
 						breakLoop = true;
 						return false;
 					}
@@ -94,7 +97,10 @@ async function scraper(
 					const word = $(li).find("a").text();
 					words.push(word);
 
-					if (limit !== "none" && words.length === parseInt(limit)) {
+					if (
+						(limit !== "none" && words.length === parseInt(limit)) ||
+						!$ul.length
+					) {
 						breakLoop = true;
 						return false;
 					}
@@ -105,7 +111,7 @@ async function scraper(
 			currentPage++;
 		}
 		if (scrapeType === "search") return defns.length ? defns : [];
-		return words.length ? words : [];
+		else if (scrapeType === "browse") return words.length ? words : [];
 	} catch (e) {
 		console.log("Scraping error\n", e);
 		return e;
