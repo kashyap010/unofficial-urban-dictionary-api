@@ -1,7 +1,10 @@
+const { getYesterdayDate } = require("./dateUtils");
+
 function validateQueryParams(params) {
 	const validParams = {
 		term: (value) => value.trim().length > 0,
 		author: (value) => value.trim().length > 0,
+		date: (value) => /^\d{4}-\d{2}-\d{2}$/.test(value),
 		strict: (value) => value === "false" || value === "true",
 		limit: (value) => value === "none" || (!isNaN(value) && value > 0),
 		matchCase: (value) => value === "false" || value === "true",
@@ -18,6 +21,17 @@ function validateQueryParams(params) {
 			return {
 				valid: false,
 				message: `Invalid value for query parameter '${param}'`,
+			};
+		}
+	}
+
+	const { date } = params;
+	if (date) {
+		const yesterdayDate = getYesterdayDate();
+		if (date > yesterdayDate) {
+			return {
+				valid: false,
+				message: `Date must be on or before ${yesterdayDate}`,
 			};
 		}
 	}

@@ -3,6 +3,7 @@ const {
 	randomController,
 	browseController,
 	authorController,
+	dateController,
 } = require("../controllers");
 const errorHandler = require("../controllers/errorHandler");
 
@@ -22,6 +23,8 @@ function setupRoutes(app) {
 	app.get("/browse", browseController);
 
 	app.get("/author", authorController);
+
+	app.get("/date", dateController);
 
 	app.use(errorHandler);
 }

@@ -17,6 +17,7 @@ async function scraper(
 	{
 		term,
 		author,
+		date,
 		strict,
 		limit,
 		matchCase,
@@ -35,19 +36,17 @@ async function scraper(
 				? `?date=${character}`
 				: `?character=${character}`;
 		else if (scrapeType === "author") fixedUrl += `?author=${author}`;
+		else if (scrapeType === "date") fixedUrl += `?date=${date}`;
+
 		let { data: html } = await axios.get(fixedUrl, { validateStatus: false });
 		let $ = cheerio.load(html);
 
-		if (
-			(scrapeType === "search" || scrapeType === "author") &&
-			!$(".definition").length
-		)
-			return {
-				term: term,
-				data: [],
-			};
+		if (scrapeType === "search" && !$(".definition").length)
+			return { term, data: [] };
+		if (scrapeType === "author" && !$(".definition").length)
+			return { author, data: [] };
 
-		if (scrapeType === "search") {
+		if (scrapeType === "search" && path != "random.php") {
 			const firstWord = $(".definition")
 				.first()
 				.find(".word")
@@ -68,15 +67,8 @@ async function scraper(
 					? [1, 5]
 					: multiPage.split("-").map((i) => parseInt(i)); // default 5 pages : user entered pages
 		}
+
 		const results = [];
-		let response =
-			scrapeType === "search"
-				? { term }
-				: {
-						character: /^\d{4}-\d{2}-\d{2}$/.test(character)
-							? "new"
-							: character,
-				  };
 		let breakLoop = false;
 		let dateChanged = false;
 		while (currentPage <= maxPage) {
@@ -88,6 +80,7 @@ async function scraper(
 						? `?date=${character}`
 						: `?character=${character}`;
 				else if (scrapeType === "author") url += `?author=${author}`;
+				else if (scrapeType === "date") url += `?date=${date}`;
 				url += `&page=${currentPage}`;
 
 				({ data: html } = await axios.get(url, { validateStatus: false }));
@@ -122,9 +115,10 @@ async function scraper(
 						return false;
 					}
 				});
-			} else if (scrapeType === "browse") {
+			} else if (scrapeType === "browse" || scrapeType === "date") {
 				const $ul = $("main").find("ul").first().children("li");
 				if (
+					scrapeType !== "date" &&
 					/^\d{4}-\d{2}-\d{2}$/.test(character) &&
 					!results.length &&
 					!$ul.length
@@ -152,6 +146,16 @@ async function scraper(
 			dateChanged = false;
 			currentPage++;
 		}
+
+		let response = {};
+
+		if (scrapeType === "search" && term) response["term"] = term;
+		else if (scrapeType === "browse")
+			response["character"] = /^\d{4}-\d{2}-\d{2}$/.test(character)
+				? "new"
+				: character;
+		else if (scrapeType === "author") response["author"] = author;
+		else if (scrapeType === "date") response["date"] = date;
 
 		response = {
 			...response,

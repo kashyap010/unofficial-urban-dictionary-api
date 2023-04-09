@@ -208,9 +208,64 @@ async function authorController(req, res, next) {
 	});
 }
 
+async function dateController(req, res, next) {
+	const {
+		date,
+		strict = "false",
+		limit = "none",
+		matchCase = "false",
+		page = "1",
+		multiPage = "false",
+	} = req.query;
+
+	if (!date)
+		return res.status(400).json({
+			error: "Bad request",
+			message: "Date query parameter is required",
+		});
+
+	const validationResult = validateQueryParams({
+		date,
+		strict,
+		limit,
+		matchCase,
+		page,
+		multiPage,
+	});
+	if (!validationResult.valid)
+		return res.status(400).json({
+			statusCode: 400,
+			error: "Bad request",
+			message: validationResult.message,
+		});
+
+	const scrapeType = "date";
+	const response = await scraper("yesterday.php", {
+		date,
+		strict,
+		limit,
+		matchCase,
+		scrapeType,
+		page,
+		multiPage,
+	});
+	if (response instanceof Error) return next(response);
+	if (response.data && !response.data.length)
+		return res.status(404).json({
+			statusCode: 404,
+			...response,
+			message: `No words found on ${date}`,
+		});
+	res.status(200).json({
+		statusCode: 200,
+		...response,
+	});
+}
+
 module.exports = {
 	searchController,
 	randomController,
 	browseController,
 	authorController,
+	dateController,
 };
