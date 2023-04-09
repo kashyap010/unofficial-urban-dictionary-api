@@ -1,5 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const { getPreviousDate } = require("../utils/dateUtils");
 
 function extractDetails($, el) {
 	return {
@@ -30,8 +31,11 @@ async function scraper(
 		if (scrapeType === "search")
 			fixedUrl = `${baseUrl}/${path}` + (term ? `?term=${term}` : "");
 		else if (scrapeType === "browse")
-			fixedUrl = `${baseUrl}/${path}?character=${character}`;
-
+			fixedUrl =
+				`${baseUrl}/${path}?` +
+				(/^\d{4}-\d{2}-\d{2}$/.test(character)
+					? `date=${character}`
+					: `character=${character}`);
 		let { data: html } = await axios.get(fixedUrl, { validateStatus: false });
 		let $ = cheerio.load(html);
 
@@ -64,13 +68,24 @@ async function scraper(
 		}
 
 		const results = [];
-		let response = scrapeType === "search" ? { term } : { character };
+		let response =
+			scrapeType === "search"
+				? { term }
+				: {
+						character: /^\d{4}-\d{2}-\d{2}$/.test(character)
+							? "new"
+							: character,
+				  };
 		let breakLoop = false;
+		let dateChanged = false;
 		while (currentPage <= maxPage) {
-			if (currentPage > 1) {
+			if (currentPage > 1 || dateChanged) {
 				let url = `${baseUrl}/${path}`;
 				if (scrapeType === "search") url += term ? `?term=${term}` : "";
-				else if (scrapeType === "browse") url += `?character=${character}`;
+				else if (scrapeType === "browse")
+					url += /^\d{4}-\d{2}-\d{2}$/.test(character)
+						? `?date=${character}`
+						: `?character=${character}`;
 				url += `&page=${currentPage}`;
 
 				({ data: html } = await axios.get(url, { validateStatus: false }));
@@ -98,6 +113,16 @@ async function scraper(
 				});
 			} else if (scrapeType === "browse") {
 				const $ul = $("main").find("ul").first().children("li");
+				if (
+					/^\d{4}-\d{2}-\d{2}$/.test(character) &&
+					!results.length &&
+					!$ul.length
+				) {
+					character = getPreviousDate(character);
+					dateChanged = true;
+					continue;
+				}
+
 				$ul.each((idx, li) => {
 					const word = $(li).find("a").text();
 					results.push(word);
@@ -113,6 +138,7 @@ async function scraper(
 			}
 			if (breakLoop) break;
 
+			dateChanged = false;
 			currentPage++;
 		}
 

@@ -1,5 +1,5 @@
 const scraper = require("../utils/scraper");
-const getYesterdayDate = require("../utils/getYesterdayDate");
+const { getYesterdayDate } = require("../utils/dateUtils");
 const validateQueryParams = require("../utils/validateQueryParams");
 
 async function searchController(req, res, next) {
