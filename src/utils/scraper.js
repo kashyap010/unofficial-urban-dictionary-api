@@ -68,6 +68,11 @@ async function scraper(
 					: multiPage.split("-").map((i) => parseInt(i)); // default 5 pages : user entered pages
 		}
 
+		const $last = $("div[aria-label='Pagination'] a[aria-label='Last page']");
+		const totalPages = $last.attr("href")
+			? $last.attr("href").match(/page=(\d+)/)[1]
+			: 1;
+
 		const results = [];
 		let breakLoop = false;
 		let dateChanged = false;
@@ -169,6 +174,7 @@ async function scraper(
 				page,
 				multiPage,
 			},
+			totalPages,
 			data: results,
 		};
 		return response;
