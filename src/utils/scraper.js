@@ -66,7 +66,6 @@ async function scraper(
 					? [1, 5]
 					: multiPage.split("-").map((i) => parseInt(i)); // default 5 pages : user entered pages
 		}
-
 		const results = [];
 		let response =
 			scrapeType === "search"

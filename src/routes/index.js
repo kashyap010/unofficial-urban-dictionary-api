@@ -3,12 +3,13 @@ const {
 	randomController,
 	browseController,
 } = require("../controllers");
+const errorHandler = require("../controllers/errorHandler");
 
 function setupRoutes(app) {
 	app.get("/", (req, res) => {
 		res.status(200).json({
-			status: 200,
-			msg: "Welcome to the Unofficial Urban Dictionary API",
+			statusCode: 200,
+			message: "Welcome to the Unofficial Urban Dictionary API",
 			visitThisUrlForDocs: "https://unofficialurbandictionaryapi.com",
 		});
 	});
@@ -18,6 +19,8 @@ function setupRoutes(app) {
 	app.get("/random", randomController);
 
 	app.get("/browse", browseController);
+
+	app.use(errorHandler);
 }
 
 module.exports = setupRoutes;

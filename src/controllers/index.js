@@ -28,6 +28,7 @@ async function searchController(req, res, next) {
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
+			statusCode: 400,
 			error: "Bad request",
 			message: validationResult.message,
 		});
@@ -40,6 +41,7 @@ async function searchController(req, res, next) {
 		page,
 		multiPage,
 	});
+	if (response instanceof Error) return next(response);
 	if (response.data && !response.data.length)
 		return res.status(404).json({
 			statusCode: 404,
@@ -52,7 +54,7 @@ async function searchController(req, res, next) {
 	});
 }
 
-async function randomController(req, res) {
+async function randomController(req, res, next) {
 	const {
 		strict = "false",
 		limit = "none",
@@ -70,6 +72,7 @@ async function randomController(req, res) {
 	});
 	if (!validationResult.valid)
 		return res.status(400).json({
+			statusCode: 400,
 			error: "Bad request",
 			message: validationResult.message,
 		});
@@ -81,6 +84,7 @@ async function randomController(req, res) {
 		page,
 		multiPage,
 	});
+	if (response instanceof Error) return next(response);
 	if (response.data && !response.data.length)
 		return res.status(404).json({
 			statusCode: 404,
@@ -93,7 +97,7 @@ async function randomController(req, res) {
 	});
 }
 
-async function browseController(req, res) {
+async function browseController(req, res, next) {
 	let character = req.query.character;
 	const {
 		strict = "false",
@@ -105,6 +109,7 @@ async function browseController(req, res) {
 
 	if (!character)
 		return res.status(400).json({
+			statusCode: 400,
 			error: "Bad request",
 			message: "Character query parameter is required",
 		});
@@ -136,6 +141,7 @@ async function browseController(req, res) {
 		page,
 		multiPage,
 	});
+	if (response instanceof Error) return next(response);
 	if (response.data && !response.data.length)
 		return res.status(404).json({
 			statusCode: 404,
