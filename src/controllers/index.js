@@ -32,7 +32,7 @@ async function searchController(req, res, next) {
 			message: validationResult.message,
 		});
 
-	const meanings = await scraper("define.php", {
+	const response = await scraper("define.php", {
 		term,
 		strict,
 		limit,
@@ -40,16 +40,15 @@ async function searchController(req, res, next) {
 		page,
 		multiPage,
 	});
-	if (!meanings.length)
+	if (response.data && !response.data.length)
 		return res.status(404).json({
-			term: term,
-			found: false,
+			statusCode: 404,
+			...response,
 			message: "No definitions found for this word",
 		});
 	res.status(200).json({
-		term: term,
-		found: true,
-		definitions: meanings,
+		statusCode: 200,
+		...response,
 	});
 }
 
@@ -75,20 +74,22 @@ async function randomController(req, res) {
 			message: validationResult.message,
 		});
 
-	const meanings = await scraper("random.php", {
+	const response = await scraper("random.php", {
 		strict,
 		limit,
 		matchCase,
 		page,
 		multiPage,
 	});
-	if (!meanings.length)
+	if (response.data && !response.data.length)
 		return res.status(404).json({
+			statusCode: 404,
+			...response,
 			message: "No definitions found for this word",
 		});
 	res.status(200).json({
-		found: true,
-		definitions: meanings,
+		statusCode: 200,
+		...response,
 	});
 }
 
@@ -126,7 +127,7 @@ async function browseController(req, res) {
 	const path = character === "new" ? "yesterday.php" : "browse.php";
 	character = character === "new" ? getYesterdayDate() : character;
 
-	const meanings = await scraper(path, {
+	const response = await scraper(path, {
 		character,
 		strict,
 		limit,
@@ -135,16 +136,15 @@ async function browseController(req, res) {
 		page,
 		multiPage,
 	});
-	if (!meanings.length)
+	if (response.data && !response.data.length)
 		return res.status(404).json({
-			found: false,
-			character: character,
+			statusCode: 404,
+			...response,
 			message: "No words found for this character",
 		});
 	res.status(200).json({
-		found: true,
-		character: character,
-		definitions: meanings,
+		statusCode: 200,
+		...response,
 	});
 }
 

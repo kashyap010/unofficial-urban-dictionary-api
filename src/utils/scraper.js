@@ -35,7 +35,11 @@ async function scraper(
 		let { data: html } = await axios.get(fixedUrl, { validateStatus: false });
 		let $ = cheerio.load(html);
 
-		if (scrapeType === "search" && !$(".definition").length) return [];
+		if (scrapeType === "search" && !$(".definition").length)
+			return {
+				term: term,
+				data: [],
+			};
 
 		if (scrapeType === "search") {
 			const firstWord = $(".definition")
@@ -59,15 +63,16 @@ async function scraper(
 					: multiPage.split("-").map((i) => parseInt(i)); // default 5 pages : user entered pages
 		}
 
-		const defns = [];
-		const words = [];
+		const results = [];
+		let response = scrapeType === "search" ? { term } : { character };
 		let breakLoop = false;
 		while (currentPage <= maxPage) {
 			if (currentPage > 1) {
-				const url =
-					`${baseUrl}/${path}` +
-					(term ? `?term=${term}` : "") +
-					`&page=${currentPage}`;
+				let url = `${baseUrl}/${path}`;
+				if (scrapeType === "search") url += term ? `?term=${term}` : "";
+				else if (scrapeType === "browse") url += `?character=${character}`;
+				url += `&page=${currentPage}`;
+
 				({ data: html } = await axios.get(url, { validateStatus: false }));
 				$ = cheerio.load(html);
 			}
@@ -81,10 +86,10 @@ async function scraper(
 					else if (JSON.parse(matchCase) && word != term) return;
 
 					const defn = extractDetails($, el);
-					defns.push(defn);
+					results.push(defn);
 
 					if (
-						(limit !== "none" && defns.length === parseInt(limit)) ||
+						(limit !== "none" && results.length === parseInt(limit)) ||
 						!$definitions.length
 					) {
 						breakLoop = true;
@@ -95,10 +100,10 @@ async function scraper(
 				const $ul = $("main").find("ul").first().children("li");
 				$ul.each((idx, li) => {
 					const word = $(li).find("a").text();
-					words.push(word);
+					results.push(word);
 
 					if (
-						(limit !== "none" && words.length === parseInt(limit)) ||
+						(limit !== "none" && results.length === parseInt(limit)) ||
 						!$ul.length
 					) {
 						breakLoop = true;
@@ -110,8 +115,22 @@ async function scraper(
 
 			currentPage++;
 		}
-		if (scrapeType === "search") return defns.length ? defns : [];
-		else if (scrapeType === "browse") return words.length ? words : [];
+
+		response = {
+			...response,
+			found: results.length ? true : false,
+			params: {
+				strict,
+				limit,
+				matchCase,
+				character,
+				scrapeType,
+				page,
+				multiPage,
+			},
+			data: results,
+		};
+		return response;
 	} catch (e) {
 		console.log("Scraping error\n", e);
 		return e;
