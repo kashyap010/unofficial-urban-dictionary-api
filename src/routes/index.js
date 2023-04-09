@@ -2,6 +2,7 @@ const {
 	searchController,
 	randomController,
 	browseController,
+	authorController,
 } = require("../controllers");
 const errorHandler = require("../controllers/errorHandler");
 
@@ -19,6 +20,8 @@ function setupRoutes(app) {
 	app.get("/random", randomController);
 
 	app.get("/browse", browseController);
+
+	app.get("/author", authorController);
 
 	app.use(errorHandler);
 }

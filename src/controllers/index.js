@@ -154,4 +154,63 @@ async function browseController(req, res, next) {
 	});
 }
 
-module.exports = { searchController, randomController, browseController };
+async function authorController(req, res, next) {
+	const {
+		author,
+		strict = "false",
+		limit = "none",
+		matchCase = "false",
+		page = "1",
+		multiPage = "false",
+	} = req.query;
+
+	if (!author)
+		return res.status(400).json({
+			error: "Bad request",
+			message: "Author query parameter is required",
+		});
+
+	const validationResult = validateQueryParams({
+		author,
+		strict,
+		limit,
+		matchCase,
+		page,
+		multiPage,
+	});
+	if (!validationResult.valid)
+		return res.status(400).json({
+			statusCode: 400,
+			error: "Bad request",
+			message: validationResult.message,
+		});
+
+	const scrapeType = "author";
+	const response = await scraper("author.php", {
+		author,
+		strict,
+		limit,
+		matchCase,
+		scrapeType,
+		page,
+		multiPage,
+	});
+	if (response instanceof Error) return next(response);
+	if (response.data && !response.data.length)
+		return res.status(404).json({
+			statusCode: 404,
+			...response,
+			message: `No definitions by ${author}`,
+		});
+	res.status(200).json({
+		statusCode: 200,
+		...response,
+	});
+}
+
+module.exports = {
+	searchController,
+	randomController,
+	browseController,
+	authorController,
+};

@@ -16,6 +16,7 @@ async function scraper(
 	path,
 	{
 		term,
+		author,
 		strict,
 		limit,
 		matchCase,
@@ -27,19 +28,20 @@ async function scraper(
 ) {
 	try {
 		const baseUrl = "https://www.urbandictionary.com/";
-		let fixedUrl;
-		if (scrapeType === "search")
-			fixedUrl = `${baseUrl}/${path}` + (term ? `?term=${term}` : "");
+		let fixedUrl = `${baseUrl}/${path}`;
+		if (scrapeType === "search") fixedUrl += term ? `?term=${term}` : "";
 		else if (scrapeType === "browse")
-			fixedUrl =
-				`${baseUrl}/${path}?` +
-				(/^\d{4}-\d{2}-\d{2}$/.test(character)
-					? `date=${character}`
-					: `character=${character}`);
+			fixedUrl += /^\d{4}-\d{2}-\d{2}$/.test(character)
+				? `?date=${character}`
+				: `?character=${character}`;
+		else if (scrapeType === "author") fixedUrl += `?author=${author}`;
 		let { data: html } = await axios.get(fixedUrl, { validateStatus: false });
 		let $ = cheerio.load(html);
 
-		if (scrapeType === "search" && !$(".definition").length)
+		if (
+			(scrapeType === "search" || scrapeType === "author") &&
+			!$(".definition").length
+		)
 			return {
 				term: term,
 				data: [],
@@ -85,19 +87,29 @@ async function scraper(
 					url += /^\d{4}-\d{2}-\d{2}$/.test(character)
 						? `?date=${character}`
 						: `?character=${character}`;
+				else if (scrapeType === "author") url += `?author=${author}`;
 				url += `&page=${currentPage}`;
 
 				({ data: html } = await axios.get(url, { validateStatus: false }));
 				$ = cheerio.load(html);
 			}
 
-			if (scrapeType === "search") {
+			if (scrapeType === "search" || scrapeType === "author") {
 				const $definitions = $(".definition");
 				$definitions.each((idx, el) => {
 					const word = $(el).find(".word").prop("innerText");
-					if (JSON.parse(strict) && word.toLowerCase() != term.toLowerCase())
+					if (
+						scrapeType === "author" &&
+						JSON.parse(strict) &&
+						word.toLowerCase() != term.toLowerCase()
+					)
 						return;
-					else if (JSON.parse(matchCase) && word != term) return;
+					else if (
+						scrapeType === "author" &&
+						JSON.parse(matchCase) &&
+						word != term
+					)
+						return;
 
 					const defn = extractDetails($, el);
 					results.push(defn);
