@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Unofficial Urban Dictionary API</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="main.js" defer></script>
+	</head>
+	<body>
+		<nav class="p-4 md:p-6">
+			<div class="flex flex-col items-center">
+				<div class="flex items-center">
+					<img
+						class="rounded-full"
+						src="https://downloadr2.apkmirror.com/wp-content/uploads/2018/09/5b997225e49f2.png"
+						alt="Logo"
+						width="50"
+					/>
+					<h1 class="ml-2 text-lg sm:text-lg">
+						Unofficial Urban Dictionary API
+					</h1>
+				</div>
+
+				<div class="mt-2 flex items-center sm:mt-0">
+					<a
+						href="https://github.com/kashyap010/unofficial-urban-dictionary-api"
+						class="mx-2"
+						>GitHub</a
+					>
+					<span>.</span>
+					<a href="https://github.com/kashyap010/" class="mx-2">Author</a>
+				</div>
+			</div>
+		</nav>
+
+		<hr class="w-3/4 md:w-3/5 mx-auto" />
+
+		<div class="bg-gray-100 p-4">
+			<div class="container mx-auto sm:max-w-xl md:max-w-3xl">
+				<!-- Endpoints section -->
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+					<section class="bg-white border rounded-lg p-4">
+						<h2 class="text-lg sm:text-xl font-semibold mb-2">Endpoints</h2>
+
+						<div class="collapsible">
+							<div class="cursor-pointer text-blue-500 relative">
+								/search
+								<span class="absolute right-0 top-0"> ▼ </span>
+							</div>
+							<p class="collapsible-content">
+								Search for a given word on Urban Dictionary.
+							</p>
+						</div>
+
+						<div class="collapsible">
+							<div class="cursor-pointer text-blue-500 relative">
+								/random
+								<span class="absolute right-0 top-0"> ▼ </span>
+							</div>
+							<p class="collapsible-content">
+								Get a random word from Urban Dictionary.
+							</p>
+						</div>
+
+						<div class="collapsible">
+							<div class="cursor-pointer text-blue-500 relative">
+								/browse
+								<span class="absolute right-0 top-0"> ▼ </span>
+							</div>
+							<p class="collapsible-content">
+								Browse Urban Dictionary by A-Z, new, or *.
+							</p>
+						</div>
+
+						<div class="collapsible">
+							<div class="cursor-pointer text-blue-500 relative">
+								/author
+								<span class="absolute right-0 top-0"> ▼ </span>
+							</div>
+							<p class="collapsible-content">
+								Get definitions for a particular author.
+							</p>
+						</div>
+
+						<div class="collapsible">
+							<div class="cursor-pointer text-blue-500 relative">
+								/date
+								<span class="absolute right-0 top-0"> ▼ </span>
+							</div>
+							<p class="collapsible-content">
+								Get definitions on a particular date.
+							</p>
+						</div>
+					</section>
+
+					<section class="bg-white border rounded-lg p-4">
+						<h2 class="text-lg sm:text-xl font-semibold mb-2">
+							Query Parameters
+						</h2>
+						<!-- Content for query parameters section -->
+					</section>
+				</div>
+
+				<!-- Generated URL and Response section -->
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2 mt-4">
+					<section class="bg-white border rounded-lg p-4">
+						<h2 class="text-lg sm:text-xl font-semibold mb-2">Generated URL</h2>
+						<!-- Content for generated URL section -->
+					</section>
+					<section class="bg-white border rounded-lg p-4">
+						<h2 class="text-lg sm:text-xl font-semibold mb-2">Response</h2>
+						<!-- Content for response section -->
+					</section>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
