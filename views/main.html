@@ -47,7 +47,7 @@
 
 						<div class="collapsible">
 							<div class="cursor-pointer text-blue-500 relative">
-								/search
+								<span class="endpoint">/search</span>
 								<span class="absolute right-0 top-0"> ▼ </span>
 							</div>
 							<p class="collapsible-content">
@@ -57,7 +57,7 @@
 
 						<div class="collapsible">
 							<div class="cursor-pointer text-blue-500 relative">
-								/random
+								<span class="endpoint">/random</span>
 								<span class="absolute right-0 top-0"> ▼ </span>
 							</div>
 							<p class="collapsible-content">
@@ -67,7 +67,7 @@
 
 						<div class="collapsible">
 							<div class="cursor-pointer text-blue-500 relative">
-								/browse
+								<span class="endpoint">/browse</span>
 								<span class="absolute right-0 top-0"> ▼ </span>
 							</div>
 							<p class="collapsible-content">
@@ -77,7 +77,7 @@
 
 						<div class="collapsible">
 							<div class="cursor-pointer text-blue-500 relative">
-								/author
+								<span class="endpoint">/author</span>
 								<span class="absolute right-0 top-0"> ▼ </span>
 							</div>
 							<p class="collapsible-content">
@@ -87,7 +87,7 @@
 
 						<div class="collapsible">
 							<div class="cursor-pointer text-blue-500 relative">
-								/date
+								<span class="endpoint">/date</span>
 								<span class="absolute right-0 top-0"> ▼ </span>
 							</div>
 							<p class="collapsible-content">
@@ -97,8 +97,13 @@
 					</section>
 
 					<section class="bg-white border rounded-lg p-4">
-						<h2 class="text-lg sm:text-xl font-semibold mb-2">
+						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
 							Query Parameters
+							<span
+								class="text-blue-500 absolute right-0 top-1/2 -translate-y-2/4 text-sm"
+								id="current-endpoint"
+								>/search</span
+							>
 						</h2>
 						<!-- Content for query parameters section -->
 					</section>
