@@ -1,11 +1,11 @@
 const collapsibles = Array.from(document.getElementsByClassName("collapsible"));
-const endpoints = Array.from(document.querySelectorAll(".endpoint"));
+const endpoints = Array.from(document.querySelectorAll(".endpoint-name"));
 const currentEndpoint = document.getElementById("current-endpoint");
 
 collapsibles.forEach((collapsible) => {
 	collapsible.addEventListener("click", function () {
 		const content = collapsible.querySelector(".collapsible-content");
-		const icon = collapsible.querySelector("span");
+		const icon = collapsible.querySelector("span:last-child");
 		icon.classList.toggle("rotate");
 		if (content.style.maxHeight) {
 			content.style.maxHeight = null;

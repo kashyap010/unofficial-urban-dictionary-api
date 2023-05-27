@@ -39,63 +39,61 @@
 		<hr class="w-3/4 md:w-3/5 mx-auto" />
 
 		<div class="bg-gray-100 p-4">
-			<div class="container mx-auto sm:max-w-xl md:max-w-3xl">
-				<!-- Endpoints section -->
-				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+			<div
+				class="container mx-auto w-full sm:max-w-2xl md:max-w-3xl lg:max-w-5xl"
+			>
+				<div class="grid grid-cols-1 gap-x-3 md:grid-cols-[auto_65%]">
+					<!-- Endpoints section -->
 					<section class="bg-white border rounded-lg p-4">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Endpoints</h2>
 
-						<div class="collapsible">
-							<div class="cursor-pointer text-blue-500 relative">
-								<span class="endpoint">/search</span>
-								<span class="absolute right-0 top-0"> ▼ </span>
+						<div class="endpoint">
+							<div class="endpoint-name cursor-pointer text-blue-500">
+								/search
 							</div>
-							<p class="collapsible-content">
+							<div class="endpoint-definition">
 								Search for a given word on Urban Dictionary.
-							</p>
+							</div>
 						</div>
 
-						<div class="collapsible">
-							<div class="cursor-pointer text-blue-500 relative">
-								<span class="endpoint">/random</span>
-								<span class="absolute right-0 top-0"> ▼ </span>
+						<div class="endpoint">
+							<div class="endpoint-name cursor-pointer text-blue-500">
+								/random
 							</div>
-							<p class="collapsible-content">
+							<div class="endpoint-definition">
 								Get a random word from Urban Dictionary.
-							</p>
+							</div>
 						</div>
 
-						<div class="collapsible">
-							<div class="cursor-pointer text-blue-500 relative">
-								<span class="endpoint">/browse</span>
-								<span class="absolute right-0 top-0"> ▼ </span>
+						<div class="endpoint">
+							<div class="endpoint-name cursor-pointer text-blue-500">
+								/browse
 							</div>
-							<p class="collapsible-content">
+							<div class="endpoint-definition">
 								Browse Urban Dictionary by A-Z, new, or *.
-							</p>
+							</div>
 						</div>
 
-						<div class="collapsible">
-							<div class="cursor-pointer text-blue-500 relative">
-								<span class="endpoint">/author</span>
-								<span class="absolute right-0 top-0"> ▼ </span>
+						<div class="endpoint">
+							<div class="endpoint-name cursor-pointer text-blue-500">
+								/author
 							</div>
-							<p class="collapsible-content">
+							<div class="endpoint-definition">
 								Get definitions for a particular author.
-							</p>
+							</div>
 						</div>
 
-						<div class="collapsible">
-							<div class="cursor-pointer text-blue-500 relative">
-								<span class="endpoint">/date</span>
-								<span class="absolute right-0 top-0"> ▼ </span>
+						<div class="endpoint">
+							<div class="endpoint-name cursor-pointer text-blue-500">
+								/date
 							</div>
-							<p class="collapsible-content">
+							<div class="endpoint-definition">
 								Get definitions on a particular date.
-							</p>
+							</div>
 						</div>
 					</section>
 
+					<!-- Query parameters section -->
 					<section class="bg-white border rounded-lg p-4">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
 							Query Parameters
@@ -105,12 +103,152 @@
 								>/search</span
 							>
 						</h2>
-						<!-- Content for query parameters section -->
+
+						<div class="query-params-container">
+							<div class="query-param">
+								<div>
+									<span class="text-blue-500">term</span
+									><span class="text-red-500">*</span
+									><span> - The word/phrase that you wish to search</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
+								>
+									Eg. yeet, Weird flex but OK
+								</div>
+							</div>
+
+							<div class="query-param hidden">
+								<div>
+									<span class="text-blue-500">author</span
+									><span class="text-red-500">*</span
+									><span> - Name of the author</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
+								>
+									Eg. The Onion, Aaron Peckham
+								</div>
+							</div>
+
+							<div class="query-param hidden">
+								<div>
+									<span class="text-blue-500">date</span
+									><span class="text-red-500">*</span
+									><span> - Date you wish to search for</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
+								>
+									yyyy-mm-dd
+								</div>
+							</div>
+
+							<div class="query-param hidden">
+								<div>
+									<span class="text-blue-500">character</span
+									><span class="text-red-500">*</span
+									><span> - character you wish to search for</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
+								>
+									A-Z, *, or "new"
+								</div>
+							</div>
+
+							<div class="query-param mt-1">
+								<div>
+									<span class="text-blue-500">strict</span
+									><span> - Toggle strict matching</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
+								>
+									true, false (default)
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
+								>
+									Eg. return only "bigger" and not "biggering", "biggered"
+								</div>
+							</div>
+
+							<div class="query-param mt-1">
+								<div>
+									<span class="text-blue-500">limit</span
+									><span>
+										- Specify the number of definitions to be returned</span
+									>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
+								>
+									values > 0
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
+								>
+									Eg. limit = 6, only 6 definitions will be returned
+								</div>
+							</div>
+
+							<div class="query-param mt-1">
+								<div>
+									<span class="text-blue-500">matchCase</span
+									><span> - Toggle case-sensitive matching</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
+								>
+									true, false (default)
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
+								>
+									Eg. whether to return "hello" or "hEllO"
+								</div>
+							</div>
+
+							<div class="query-param">
+								<div>
+									<span class="text-blue-500">page</span
+									><span> - Get definitions from a particular page</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
+								>
+									values > 1
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
+								>
+									Eg. page = 5, get all definitions from the 5th page only
+								</div>
+							</div>
+
+							<div class="query-param">
+								<div>
+									<span class="text-blue-500">multiPage</span
+									><span> - Get definitions from a given range of pages</span>
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
+								>
+									false or 'min,max'
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
+								>
+									Eg. '2,4' will return all definitions from page 2 to page 4
+								</div>
+							</div>
+						</div>
 					</section>
 				</div>
 
 				<!-- Generated URL and Response section -->
-				<div class="grid grid-cols-1 gap-4 md:grid-cols-2 mt-4">
+				<div class="grid grid-cols-1 gap-x-3 md:grid-cols-2 mt-4">
 					<section class="bg-white border rounded-lg p-4">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Generated URL</h2>
 						<!-- Content for generated URL section -->
