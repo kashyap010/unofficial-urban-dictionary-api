@@ -1,24 +1,43 @@
-const collapsibles = Array.from(document.getElementsByClassName("collapsible"));
 const endpoints = Array.from(document.querySelectorAll(".endpoint-name"));
 const currentEndpoint = document.getElementById("current-endpoint");
 
-collapsibles.forEach((collapsible) => {
-	collapsible.addEventListener("click", function () {
-		const content = collapsible.querySelector(".collapsible-content");
-		const icon = collapsible.querySelector("span:last-child");
-		icon.classList.toggle("rotate");
-		if (content.style.maxHeight) {
-			content.style.maxHeight = null;
-		} else {
-			content.style.maxHeight = `${content.scrollHeight}px`;
-		}
+function hideElements(list) {
+	list.forEach((elem) => {
+		document.querySelector(`.query-param-${elem}`).classList.add("hidden");
 	});
-});
+}
+
+function changeQueryParamsLayout(path) {
+	switch (path) {
+		case "/random":
+			hideElements(["author", "date", "character", "term"]);
+			break;
+		case "/search":
+			document.querySelector(".query-param-term").classList.remove("hidden");
+			hideElements(["author", "date", "character"]);
+			break;
+		case "/browse":
+			document
+				.querySelector(".query-param-character")
+				.classList.remove("hidden");
+			hideElements(["author", "date", "term"]);
+			break;
+		case "/author":
+			document.querySelector(".query-param-author").classList.remove("hidden");
+			hideElements(["term", "date", "character"]);
+			break;
+		case "/date":
+			document.querySelector(".query-param-date").classList.remove("hidden");
+			hideElements(["author", "term", "character"]);
+			break;
+	}
+}
 
 endpoints.forEach((endpoint) => {
 	endpoint.addEventListener("click", function (e) {
 		const path = e.target.innerText;
 		currentEndpoint.innerText = path;
-		e.stopImmediatePropagation();
+
+		changeQueryParamsLayout(path);
 	});
 });

@@ -17,8 +17,7 @@
 						class="rounded-full"
 						src="https://downloadr2.apkmirror.com/wp-content/uploads/2018/09/5b997225e49f2.png"
 						alt="Logo"
-						width="50"
-					/>
+						width="50" />
 					<h1 class="ml-2 text-lg sm:text-lg">
 						Unofficial Urban Dictionary API
 					</h1>
@@ -40,8 +39,7 @@
 
 		<div class="bg-gray-100 p-4">
 			<div
-				class="container mx-auto w-full sm:max-w-2xl md:max-w-3xl lg:max-w-5xl"
-			>
+				class="container mx-auto w-full sm:max-w-[85%] md:max-w-[90%] lg:max-w-5xl">
 				<div class="grid grid-cols-1 gap-x-3 md:grid-cols-[auto_65%]">
 					<!-- Endpoints section -->
 					<section class="bg-white border rounded-lg p-4">
@@ -94,7 +92,7 @@
 					</section>
 
 					<!-- Query parameters section -->
-					<section class="bg-white border rounded-lg p-4">
+					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
 							Query Parameters
 							<span
@@ -105,54 +103,54 @@
 						</h2>
 
 						<div class="query-params-container">
-							<div class="query-param">
+							<div class="query-param-term">
 								<div>
 									<span class="text-blue-500">term</span
 									><span class="text-red-500">*</span
-									><span> - The word/phrase that you wish to search</span>
+									><span> - The term that you wish to search</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									words or phrases
+								</div>
+								<div
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
 									Eg. yeet, Weird flex but OK
 								</div>
 							</div>
 
-							<div class="query-param hidden">
+							<div class="query-param-author hidden">
 								<div>
 									<span class="text-blue-500">author</span
 									><span class="text-red-500">*</span
 									><span> - Name of the author</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
 									Eg. The Onion, Aaron Peckham
 								</div>
 							</div>
 
-							<div class="query-param hidden">
+							<div class="query-param-date hidden">
 								<div>
 									<span class="text-blue-500">date</span
 									><span class="text-red-500">*</span
 									><span> - Date you wish to search for</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
 									yyyy-mm-dd
 								</div>
 							</div>
 
-							<div class="query-param hidden">
+							<div class="query-param-character hidden">
 								<div>
 									<span class="text-blue-500">character</span
 									><span class="text-red-500">*</span
 									><span> - character you wish to search for</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
 									A-Z, *, or "new"
 								</div>
 							</div>
@@ -160,16 +158,14 @@
 							<div class="query-param mt-1">
 								<div>
 									<span class="text-blue-500">strict</span
-									><span> - Toggle strict matching</span>
+									><span> - Whether to return only exact matches</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
 									true, false (default)
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
 									Eg. return only "bigger" and not "biggering", "biggered"
 								</div>
 							</div>
@@ -182,13 +178,11 @@
 									>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
 									values > 0
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
 									Eg. limit = 6, only 6 definitions will be returned
 								</div>
 							</div>
@@ -199,47 +193,41 @@
 									><span> - Toggle case-sensitive matching</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
 									true, false (default)
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
 									Eg. whether to return "hello" or "hEllO"
 								</div>
 							</div>
 
-							<div class="query-param">
+							<div class="query-param mt-1">
 								<div>
 									<span class="text-blue-500">page</span
 									><span> - Get definitions from a particular page</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
 									values > 1
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
 									Eg. page = 5, get all definitions from the 5th page only
 								</div>
 							</div>
 
-							<div class="query-param">
+							<div class="query-param mt-1">
 								<div>
 									<span class="text-blue-500">multiPage</span
 									><span> - Get definitions from a given range of pages</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
 									false or 'min,max'
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md"
-								>
+									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
 									Eg. '2,4' will return all definitions from page 2 to page 4
 								</div>
 							</div>
@@ -253,7 +241,7 @@
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Generated URL</h2>
 						<!-- Content for generated URL section -->
 					</section>
-					<section class="bg-white border rounded-lg p-4">
+					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Response</h2>
 						<!-- Content for response section -->
 					</section>
