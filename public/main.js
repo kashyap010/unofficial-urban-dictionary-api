@@ -17,7 +17,13 @@ function copyToClipboard() {
 	}, 3000);
 }
 
-function hideElements(list) {
+function hideExploreElements(list) {
+	list.forEach((elem) => {
+		document.querySelector(`.explore-${elem}`).classList.add("hidden");
+	});
+}
+
+function hideQueryParamElements(list) {
 	list.forEach((elem) => {
 		document.querySelector(`.query-param-${elem}`).classList.add("hidden");
 	});
@@ -26,25 +32,33 @@ function hideElements(list) {
 function changeQueryParamsLayout(path) {
 	switch (path) {
 		case "/random":
-			hideElements(["author", "date", "character", "term"]);
+			hideQueryParamElements(["author", "date", "character", "term"]);
+			hideExploreElements(["author", "date", "character", "term"]);
 			break;
 		case "/search":
 			document.querySelector(".query-param-term").classList.remove("hidden");
-			hideElements(["author", "date", "character"]);
+			hideQueryParamElements(["author", "date", "character"]);
+			hideExploreElements(["author", "date", "character"]);
 			break;
 		case "/browse":
 			document
 				.querySelector(".query-param-character")
 				.classList.remove("hidden");
-			hideElements(["author", "date", "term"]);
+			hideQueryParamElements(["author", "date", "term"]);
+			document.querySelector(".explore-character").classList.remove("hidden");
+			hideExploreElements(["author", "date", "term"]);
 			break;
 		case "/author":
 			document.querySelector(".query-param-author").classList.remove("hidden");
-			hideElements(["term", "date", "character"]);
+			hideQueryParamElements(["term", "date", "character"]);
+			document.querySelector(".explore-author").classList.remove("hidden");
+			hideExploreElements(["term", "date", "character"]);
 			break;
 		case "/date":
 			document.querySelector(".query-param-date").classList.remove("hidden");
-			hideElements(["author", "term", "character"]);
+			hideQueryParamElements(["author", "term", "character"]);
+			document.querySelector(".explore-date").classList.remove("hidden");
+			hideExploreElements(["author", "term", "character"]);
 			break;
 	}
 }

@@ -30,10 +30,13 @@
 					<a
 						href="https://github.com/kashyap010/unofficial-urban-dictionary-api"
 						class="mx-2"
+						target="_blank"
 						>GitHub</a
 					>
 					<span>.</span>
-					<a href="https://github.com/kashyap010/" class="mx-2">Author</a>
+					<a href="https://github.com/kashyap010/" class="mx-2" target="_blank"
+						>Author</a
+					>
 				</div>
 			</div>
 		</nav>
@@ -43,6 +46,7 @@
 		<div class="bg-gray-100 p-4">
 			<div class="container mx-auto w-full sm:max-w-[85%] md:max-w-[90%]">
 				<div class="grid grid-cols-1 gap-x-3 md:grid-cols-[auto_65%]">
+					<!-- Endpoints section -->
 					<section class="bg-white border rounded-lg p-4">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Endpoints</h2>
 
@@ -92,6 +96,7 @@
 						</div>
 					</section>
 
+					<!-- Query Parameters section -->
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
 							Query Parameters
@@ -159,7 +164,7 @@
 								</div>
 							</div>
 
-							<div class="query-param mt-1">
+							<div class="mt-1">
 								<div>
 									<span class="text-blue-500">strict</span
 									><span> - Whether to return only exact matches</span>
@@ -174,7 +179,7 @@
 								</div>
 							</div>
 
-							<div class="query-param mt-1">
+							<div class="mt-1">
 								<div>
 									<span class="text-blue-500">limit</span
 									><span>
@@ -191,7 +196,7 @@
 								</div>
 							</div>
 
-							<div class="query-param mt-1">
+							<div class="mt-1">
 								<div>
 									<span class="text-blue-500">matchCase</span
 									><span> - Toggle case-sensitive matching</span>
@@ -206,7 +211,7 @@
 								</div>
 							</div>
 
-							<div class="query-param mt-1">
+							<div class="mt-1">
 								<div>
 									<span class="text-blue-500">page</span
 									><span> - Get definitions from a particular page</span>
@@ -221,7 +226,7 @@
 								</div>
 							</div>
 
-							<div class="query-param mt-1">
+							<div class="mt-1">
 								<div>
 									<span class="text-blue-500">multiPage</span
 									><span> - Get definitions from a given range of pages</span>
@@ -240,11 +245,98 @@
 				</div>
 
 				<div
-					class="grid grid-cols-1 gap-x-3 md:grid-cols-[40%_auto] md:grid-rows-2 md:gap-y-4 mt-4">
+					class="grid grid-cols-1 gap-x-3 md:grid-cols-[30%_auto] md:grid-rows-[30%_auto] md:gap-y-4 mt-4">
+					<!-- Explore section -->
 					<section class="bg-white border rounded-lg p-4 row-span-full">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Explore</h2>
+
+						<div class="explore-term mb-2">
+							<label
+								for="term"
+								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								term
+							</label>
+							<input
+								type="text"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+						</div>
+
+						<div class="explore-character hidden mb-2">
+							<label
+								for="character"
+								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								character
+							</label>
+							<input
+								type="text"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+						</div>
+
+						<div class="explore-author hidden mb-2">
+							<label
+								for="author"
+								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								author
+							</label>
+							<input
+								type="text"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+						</div>
+
+						<div class="explore-date hidden mb-2">
+							<label
+								for="date"
+								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								date
+							</label>
+							<input
+								type="date"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+						</div>
+
+						<div class="explore-strict inline">
+							<label for="strict" class="text-blue-500">strict</label>
+							<input
+								type="checkbox"
+								id="strict"
+								name="checkbox"
+								class="align-middle" />
+						</div>
+
+						<div class="explore-matchCase inline ml-2">
+							<label for="matchCase" class="text-blue-500">matchCase</label>
+							<input
+								type="checkbox"
+								id="matchCase"
+								name="checkbox"
+								class="align-middle" />
+						</div>
+
+						<div class="explore-limit mt-2">
+							<label for="limit" class="text-blue-500 block"> limit </label>
+							<input
+								type="number"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+						</div>
+
+						<div class="explore-page mt-2">
+							<label for="page" class="text-blue-500 block"> page </label>
+							<input
+								type="number"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+						</div>
+
+						<div class="explore-multiPage mt-2">
+							<label for="multiPage" class="text-blue-500 block">
+								multiPage
+							</label>
+							<input
+								type="number"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+						</div>
 					</section>
 
+					<!-- Generated URL section -->
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
 							Generated URL
@@ -255,7 +347,6 @@
 								><i class="fas fa-copy"></i
 							></span>
 						</h2>
-						<!-- Content for generated URL section -->
 						<div class="flex justify-between items-stretch">
 							<span
 								class="bg-slate-100 p-2 grow rounded-l-lg break-all"
@@ -269,9 +360,9 @@
 						</div>
 					</section>
 
+					<!-- Response section -->
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Response</h2>
-						<!-- Content for response section -->
 					</section>
 				</div>
 			</div>
