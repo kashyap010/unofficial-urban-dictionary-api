@@ -5,6 +5,8 @@ const clipboardIconContainer = document.getElementById(
 	"clipboard-icon-container"
 );
 
+function fetchMeaning() {}
+
 function copyToClipboard() {
 	navigator.clipboard.writeText(generatedUrl.innerText);
 
@@ -38,6 +40,7 @@ function changeQueryParamsLayout(path) {
 		case "/search":
 			document.querySelector(".query-param-term").classList.remove("hidden");
 			hideQueryParamElements(["author", "date", "character"]);
+			document.querySelector(".explore-term").classList.remove("hidden");
 			hideExploreElements(["author", "date", "character"]);
 			break;
 		case "/browse":
