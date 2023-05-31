@@ -1,5 +1,21 @@
 const endpoints = Array.from(document.querySelectorAll(".endpoint-name"));
 const currentEndpoint = document.getElementById("current-endpoint");
+const generatedUrl = document.getElementById("generated-url");
+const clipboardIconContainer = document.getElementById(
+	"clipboard-icon-container"
+);
+
+function copyToClipboard() {
+	navigator.clipboard.writeText(generatedUrl.innerText);
+
+	const i = clipboardIconContainer.querySelector("i");
+	i.classList.remove("fa-copy");
+	i.classList.add("fa-clipboard");
+	setTimeout(() => {
+		i.classList.remove("fa-clipboard");
+		i.classList.add("fa-copy");
+	}, 3000);
+}
 
 function hideElements(list) {
 	list.forEach((elem) => {

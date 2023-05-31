@@ -7,6 +7,9 @@
 		<title>Unofficial Urban Dictionary API</title>
 		<script src="https://cdn.tailwindcss.com"></script>
 		<link rel="stylesheet" href="styles.css" />
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+			rel="stylesheet" />
 		<script src="main.js" defer></script>
 	</head>
 	<body>
@@ -102,8 +105,9 @@
 						<div class="query-params-container">
 							<div class="query-param-term">
 								<div>
-									<span class="text-blue-500">term</span
-									><span class="text-red-500">*</span
+									<span
+										class="text-blue-500 after:content-['*'] after:text-red-500"
+										>term</span
 									><span> - The term that you wish to search</span>
 								</div>
 								<div
@@ -118,8 +122,9 @@
 
 							<div class="query-param-author hidden">
 								<div>
-									<span class="text-blue-500">author</span
-									><span class="text-red-500">*</span
+									<span
+										class="text-blue-500 after:content-['*'] after:text-red-500"
+										>author</span
 									><span> - Name of the author</span>
 								</div>
 								<div
@@ -130,8 +135,9 @@
 
 							<div class="query-param-date hidden">
 								<div>
-									<span class="text-blue-500">date</span
-									><span class="text-red-500">*</span
+									<span
+										class="text-blue-500 after:content-['*'] after:text-red-500"
+										>date</span
 									><span> - Date you wish to search for</span>
 								</div>
 								<div
@@ -142,8 +148,9 @@
 
 							<div class="query-param-character hidden">
 								<div>
-									<span class="text-blue-500">character</span
-									><span class="text-red-500">*</span
+									<span
+										class="text-blue-500 after:content-['*'] after:text-red-500"
+										>character</span
 									><span> - character you wish to search for</span>
 								</div>
 								<div
@@ -233,14 +240,33 @@
 				</div>
 
 				<div
-					class="grid grid-cols-1 gap-x-3 md:grid-cols-2 md:grid-rows-2 md:gap-y-4 mt-4">
+					class="grid grid-cols-1 gap-x-3 md:grid-cols-[40%_auto] md:grid-rows-2 md:gap-y-4 mt-4">
 					<section class="bg-white border rounded-lg p-4 row-span-full">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Explore</h2>
 					</section>
 
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
-						<h2 class="text-lg sm:text-xl font-semibold mb-2">Generated URL</h2>
+						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
+							Generated URL
+							<span
+								class="absolute right-0 mr-1 cursor-pointer text-blue-300"
+								id="clipboard-icon-container"
+								onclick="copyToClipboard();"
+								><i class="fas fa-copy"></i
+							></span>
+						</h2>
 						<!-- Content for generated URL section -->
+						<div class="flex justify-between items-stretch">
+							<span
+								class="bg-slate-100 p-2 grow rounded-l-lg break-all"
+								id="generated-url"
+								>https://www.unofficialurbandictionaryapi.com/api/</span
+							>
+							<span
+								class="p-2 bg-red-200 rounded-r-lg cursor-pointer flex items-center"
+								><i class="fas fa-arrow-right"></i
+							></span>
+						</div>
 					</section>
 
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
