@@ -258,7 +258,8 @@
 							</label>
 							<input
 								type="text"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'term');" />
 						</div>
 
 						<div class="explore-character hidden mb-2">
@@ -269,7 +270,8 @@
 							</label>
 							<input
 								type="text"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'character');" />
 						</div>
 
 						<div class="explore-author hidden mb-2">
@@ -280,7 +282,8 @@
 							</label>
 							<input
 								type="text"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'author');" />
 						</div>
 
 						<div class="explore-date hidden mb-2">
@@ -291,7 +294,8 @@
 							</label>
 							<input
 								type="date"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'date');" />
 						</div>
 
 						<div class="explore-strict inline">
@@ -300,7 +304,8 @@
 								type="checkbox"
 								id="strict"
 								name="checkbox"
-								class="align-middle" />
+								class="align-middle"
+								onchange="handleInputChange(this, 'strict', true);" />
 						</div>
 
 						<div class="explore-matchCase inline ml-2">
@@ -309,21 +314,24 @@
 								type="checkbox"
 								id="matchCase"
 								name="checkbox"
-								class="align-middle" />
+								class="align-middle"
+								onchange="handleInputChange(this, 'matchCase', true);" />
 						</div>
 
 						<div class="explore-limit mt-2">
 							<label for="limit" class="text-blue-500 block"> limit </label>
 							<input
 								type="number"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'limit');" />
 						</div>
 
 						<div class="explore-page mt-2">
 							<label for="page" class="text-blue-500 block"> page </label>
 							<input
 								type="number"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'page');" />
 						</div>
 
 						<div class="explore-multiPage mt-2">
@@ -331,8 +339,9 @@
 								multiPage
 							</label>
 							<input
-								type="number"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" />
+								type="text"
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'multiPage');" />
 						</div>
 					</section>
 

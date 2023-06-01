@@ -4,8 +4,16 @@ const generatedUrl = document.getElementById("generated-url");
 const clipboardIconContainer = document.getElementById(
 	"clipboard-icon-container"
 );
+const baseUrl = "https://www.unofficialurbandictionaryapi.com/api";
+let queryParams = "";
 
 function fetchMeaning() {}
+
+function handleInputChange(elem, type, isCheckbox = false) {
+	const value = isCheckbox ? elem.checked : elem.value;
+	queryParams += `${type}=${value}&`;
+	changeGeneratedUrl(currentEndpoint.innerText, queryParams);
+}
 
 function copyToClipboard() {
 	navigator.clipboard.writeText(generatedUrl.innerText);
@@ -66,11 +74,17 @@ function changeQueryParamsLayout(path) {
 	}
 }
 
+function changeGeneratedUrl(path, queryParams = "") {
+	generatedUrl.innerText = baseUrl + path + "?" + queryParams;
+}
+
 endpoints.forEach((endpoint) => {
 	endpoint.addEventListener("click", function (e) {
 		const path = e.target.innerText;
 		currentEndpoint.innerText = path;
 
 		changeQueryParamsLayout(path);
+
+		changeGeneratedUrl(path);
 	});
 });
