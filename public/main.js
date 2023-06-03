@@ -1,3 +1,4 @@
+const datePicker = document.getElementById("date-picker");
 const endpoints = Array.from(document.querySelectorAll(".endpoint-name"));
 const currentEndpoint = document.getElementById("current-endpoint");
 const generatedUrl = document.getElementById("generated-url");
@@ -5,14 +6,58 @@ const clipboardIconContainer = document.getElementById(
 	"clipboard-icon-container"
 );
 const baseUrl = "https://www.unofficialurbandictionaryapi.com/api";
-let queryParams = "";
+const queryParams = {
+	term: "",
+	date: "",
+	character: "",
+	author: "",
+	strict: false,
+	matchCase: false,
+	limit: "none",
+	page: 1,
+	multiPage: false,
+};
 
-function fetchMeaning() {}
+async function fetchMeaning() {
+	const url = generatedUrl.innerText;
+	const response = await fetch(`http://localhost:8080/api/random`);
+	const data = await response.json();
+	console.log(data);
+}
+
+function buildQueryParamString(path, type) {
+	let queryParamString = "?";
+
+	switch (path) {
+		case "/search":
+			queryParamString += `term=${queryParams.term}&`;
+			break;
+		case "/browse":
+			queryParamString += `character=${queryParams.character}&`;
+			break;
+		case "/date":
+			queryParamString += `date=${queryParams.date}&`;
+			break;
+		case "/author":
+			queryParamString += `author=${queryParams.author}&`;
+			break;
+		default:
+			break;
+	}
+
+	for (const [key, value] of Object.entries(queryParams)) {
+		if (["term", "date", "character", "author"].includes(key)) continue;
+		queryParamString += `${key}=${value}&`;
+	}
+
+	return queryParamString;
+}
 
 function handleInputChange(elem, type, isCheckbox = false) {
 	const value = isCheckbox ? elem.checked : elem.value;
-	queryParams += `${type}=${value}&`;
-	changeGeneratedUrl(currentEndpoint.innerText, queryParams);
+	const path = currentEndpoint.innerText;
+	queryParams[type] = value;
+	changeGeneratedUrl(path, buildQueryParamString(path));
 }
 
 function copyToClipboard() {
@@ -75,7 +120,7 @@ function changeQueryParamsLayout(path) {
 }
 
 function changeGeneratedUrl(path, queryParams = "") {
-	generatedUrl.innerText = baseUrl + path + "?" + queryParams;
+	generatedUrl.innerText = baseUrl + path + queryParams;
 }
 
 endpoints.forEach((endpoint) => {
@@ -87,4 +132,8 @@ endpoints.forEach((endpoint) => {
 
 		changeGeneratedUrl(path);
 	});
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+	datePicker.max = new Date().toISOString().split("T")[0];
 });

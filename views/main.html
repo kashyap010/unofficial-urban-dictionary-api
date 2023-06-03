@@ -270,8 +270,9 @@
 							</label>
 							<input
 								type="text"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-								onkeyup="handleInputChange(this, 'character');" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 invalid:border-red-500 focus:ring-sky-500 focus:ring-1"
+								onkeyup="handleInputChange(this, 'character');"
+								pattern="^([A-Z*]|new)$" />
 						</div>
 
 						<div class="explore-author hidden mb-2">
@@ -294,6 +295,7 @@
 							</label>
 							<input
 								type="date"
+								id="date-picker"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
 								onkeyup="handleInputChange(this, 'date');" />
 						</div>
@@ -323,7 +325,8 @@
 							<input
 								type="number"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-								onkeyup="handleInputChange(this, 'limit');" />
+								onkeyup="handleInputChange(this, 'limit');"
+								min="1" />
 						</div>
 
 						<div class="explore-page mt-2">
@@ -331,7 +334,8 @@
 							<input
 								type="number"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-								onkeyup="handleInputChange(this, 'page');" />
+								onkeyup="handleInputChange(this, 'page');"
+								min="1" />
 						</div>
 
 						<div class="explore-multiPage mt-2">
@@ -340,8 +344,9 @@
 							</label>
 							<input
 								type="text"
-								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-								onkeyup="handleInputChange(this, 'multiPage');" />
+								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 invalid:border-red-500"
+								onkeyup="handleInputChange(this, 'multiPage');"
+								pattern="^\d+,\d+$" />
 						</div>
 					</section>
 
