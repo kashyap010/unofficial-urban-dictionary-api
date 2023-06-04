@@ -5,7 +5,10 @@ const generatedUrl = document.getElementById("generated-url");
 const clipboardIconContainer = document.getElementById(
 	"clipboard-icon-container"
 );
-const baseUrl = "https://www.unofficialurbandictionaryapi.com/api";
+const jsonOutput = document.getElementById("json-output");
+
+// const baseUrl = "https://www.unofficialurbandictionaryapi.com/api";
+const baseUrl = "http://localhost:8080/api"; // replace with your localhost port when running on your local device
 const queryParams = {
 	term: "",
 	date: "",
@@ -20,9 +23,12 @@ const queryParams = {
 
 async function fetchMeaning() {
 	const url = generatedUrl.innerText;
-	const response = await fetch(`http://localhost:8080/api/random`);
+	console.log(url);
+	const response = await fetch(url);
 	const data = await response.json();
 	console.log(data);
+	renderjson.set_show_to_level(2);
+	jsonOutput.appendChild(renderjson(data));
 }
 
 function buildQueryParamString(path, type) {

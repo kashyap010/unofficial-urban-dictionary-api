@@ -10,6 +10,9 @@
 		<link
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 			rel="stylesheet" />
+		<script
+			src="https://cdn.jsdelivr.net/npm/renderjson@1.4.0/renderjson.min.js"
+			defer></script>
 		<script src="main.js" defer></script>
 	</head>
 	<body>
@@ -245,7 +248,7 @@
 				</div>
 
 				<div
-					class="grid grid-cols-1 gap-x-3 md:grid-cols-[30%_auto] md:grid-rows-[auto_1fr] md:gap-y-4 mt-4">
+					class="grid grid-cols-1 gap-x-3 md:grid-cols-[30%_70%] md:grid-rows-[auto_1fr] md:gap-y-4 mt-4">
 					<!-- Explore section -->
 					<section class="bg-white border rounded-lg p-4 row-span-full">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Explore</h2>
@@ -364,9 +367,10 @@
 						<div class="flex justify-between items-stretch">
 							<span
 								class="bg-slate-100 p-2 grow rounded-l-lg break-all"
-								id="generated-url"
-								>https://www.unofficialurbandictionaryapi.com/api/</span
-							>
+								id="generated-url">
+								<!-- https://www.unofficialurbandictionaryapi.com/api/ -->
+								http://localhost:8080/api/
+							</span>
 							<span
 								class="p-2 bg-red-200 rounded-r-lg cursor-pointer flex items-center"
 								onclick="fetchMeaning()"
@@ -378,9 +382,12 @@
 					<!-- Response section -->
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Response</h2>
+						<div id="json-output" class="bg-[#282a36] text-[#ccc]"></div>
 					</section>
 				</div>
 			</div>
 		</div>
 	</body>
 </html>
+
+#1c2833 #17233b
