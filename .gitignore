@@ -1,2 +1,5 @@
 node_modules
 todo.txt
+dist
+firebase-debug.log
+
