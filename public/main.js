@@ -22,6 +22,7 @@ const queryParams = {
 };
 
 async function fetchMeaning() {
+	jsonOutput.innerHTML = "";
 	const url = generatedUrl.innerText;
 	console.log(url);
 	const response = await fetch(url);
