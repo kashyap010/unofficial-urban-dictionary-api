@@ -7,8 +7,7 @@ const clipboardIconContainer = document.getElementById(
 );
 const jsonOutput = document.getElementById("json-output");
 
-// const baseUrl = "https://www.unofficialurbandictionaryapi.com/api";
-const baseUrl = "http://localhost:8080/api"; // replace with your localhost port when running on your local device
+const baseUrl = "https://www.unofficialurbandictionaryapi.com/api";
 const queryParams = {
 	term: "",
 	date: "",
