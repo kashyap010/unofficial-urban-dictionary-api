@@ -20,6 +20,7 @@ const queryParams = {
 	page: 1,
 	multiPage: false,
 };
+const defaultQueryParams = JSON.parse(JSON.stringify(queryParams));
 
 async function fetchMeaning() {
 	jsonOutput.innerHTML = "";
@@ -32,7 +33,7 @@ async function fetchMeaning() {
 	jsonOutput.appendChild(renderjson(data));
 }
 
-function buildQueryParamString(path, type) {
+function buildQueryParamString(path) {
 	let queryParamString = "?";
 
 	switch (path) {
@@ -52,8 +53,11 @@ function buildQueryParamString(path, type) {
 			break;
 	}
 
-	for (const [key, value] of Object.entries(queryParams)) {
+	for (let [key, value] of Object.entries(queryParams)) {
 		if (["term", "date", "character", "author"].includes(key)) continue;
+
+		if (value === "") value = defaultQueryParams[key];
+
 		queryParamString += `${key}=${value}&`;
 	}
 
