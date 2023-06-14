@@ -178,7 +178,7 @@
 								</div>
 							</div>
 
-							<div class="mt-1">
+							<div class="mt-1 query-param-strict">
 								<div>
 									<span class="text-blue-500">strict</span
 									><span> - Whether to return only exact matches</span>
@@ -210,7 +210,7 @@
 								</div>
 							</div>
 
-							<div class="mt-1">
+							<div class="mt-1 query-param-matchCase">
 								<div>
 									<span class="text-blue-500">matchCase</span
 									><span> - Toggle case-sensitive matching</span>
@@ -259,7 +259,7 @@
 				</div>
 
 				<div
-					class="grid grid-cols-1 gap-x-3 md:grid-cols-[30%_70%] md:grid-rows-[auto_1fr] md:gap-y-4 mt-4">
+					class="grid grid-cols-1 gap-x-3 md:grid-cols-[auto_70%] md:grid-rows-[auto_1fr] md:gap-y-4 mt-4">
 					<!-- Explore section -->
 					<section class="bg-white border rounded-lg p-4 row-span-full">
 						<h2 class="text-lg sm:text-xl font-semibold mb-2">Explore</h2>
@@ -311,7 +311,7 @@
 								type="date"
 								id="date-picker"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-								onkeyup="handleInputChange(this, 'date');" />
+								onchange="handleInputChange(this, 'date');" />
 						</div>
 
 						<div class="explore-strict inline">

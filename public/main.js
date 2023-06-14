@@ -29,7 +29,7 @@ async function fetchMeaning() {
 	const response = await fetch(url);
 	const data = await response.json();
 	console.log(data);
-	renderjson.set_show_to_level(2);
+	renderjson.set_show_to_level(1);
 	jsonOutput.appendChild(renderjson(data));
 }
 
@@ -98,8 +98,22 @@ function hideQueryParamElements(list) {
 function changeQueryParamsLayout(path) {
 	switch (path) {
 		case "/random":
-			hideQueryParamElements(["author", "date", "character", "term"]);
-			hideExploreElements(["author", "date", "character", "term"]);
+			hideQueryParamElements([
+				"author",
+				"date",
+				"character",
+				"term",
+				"strict",
+				"matchCase",
+			]);
+			hideExploreElements([
+				"author",
+				"date",
+				"character",
+				"term",
+				"strict",
+				"matchCase",
+			]);
 			break;
 		case "/search":
 			document.querySelector(".query-param-term").classList.remove("hidden");
