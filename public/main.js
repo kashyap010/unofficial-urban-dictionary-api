@@ -7,7 +7,7 @@ const clipboardIconContainer = document.getElementById(
 );
 const jsonOutput = document.getElementById("json-output");
 
-const baseUrl = "https://www.unofficialurbandictionaryapi.com/api";
+const baseUrl = "https://unofficialurbandictionaryapi.com/api";
 const queryParams = {
 	term: "",
 	date: "",
