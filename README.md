@@ -4,7 +4,7 @@ This is the repository for the Unofficial Urban Dictionary API, a RESTful API th
 
 ## Usage
 
-To use the Unofficial Urban Dictionary API, send HTTP requests to the appropriate endpoints to retrieve the desired information. The API supports the following endpoints:
+To use the Unofficial Urban Dictionary API, send HTTP GET requests to the appropriate endpoints with the necessary query parameters to retrieve the desired information. The API supports the following endpoints:
 
 - `/api/search`: Search for a given word on Urban Dictionary.
 - `/api/random`: Get a random word from Urban Dictionary.
@@ -21,7 +21,7 @@ To run the Unofficial Urban Dictionary API locally or make modifications to the 
 1. Clone the repository:
 
    ```bash 
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/kashyap010/unofficial-urban-dictionary-api
    ```
    
 2. Install the dependencies:
