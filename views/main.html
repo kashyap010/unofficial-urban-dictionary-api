@@ -19,17 +19,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta
 			name="description"
-			content="This is the unofficial Urban Dictionary API | Seach for terms, get random definitions, seach by author, date or browse by character | Explore various query parameters on the playground" />
+			content="This is an unofficial Urban Dictionary API | Seach for terms, get random definitions, seach by author, date or browse by character | Read documentation and explore query parameters on playground | Easy to use API" />
 		<title>Unofficial Urban Dictionary API</title>
-		<link
-			rel="icon"
-			type="image/png"
-			href="https://downloadr2.apkmirror.com/wp-content/uploads/2018/09/5b997225e49f2.png" />
+		<link rel="icon" type="image/webp" href="logo.webp" />
 		<script src="https://cdn.tailwindcss.com"></script>
 		<link
+			rel="preload"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-			rel="stylesheet"
-			defer />
+			as="style"
+			onload="this.onload=null;this.rel='stylesheet'" />
+		<noscript
+			><link
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+				rel="stylesheet"
+		/></noscript>
 		<style>
 			pre {
 				overflow: scroll;
@@ -44,9 +47,10 @@
 					<a href="/">
 						<img
 							class="rounded-full"
-							src="https://downloadr2.apkmirror.com/wp-content/uploads/2018/09/5b997225e49f2.png"
+							src="logo.webp"
 							alt="Logo of the Unofficial Urban Dictionary API"
-							width="50" />
+							width="50"
+							height="50" />
 					</a>
 					<h1 class="ml-2 text-lg sm:text-lg">
 						Unofficial Urban Dictionary API
@@ -285,6 +289,7 @@
 							</label>
 							<input
 								type="text"
+								id="term"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
 								onkeyup="handleInputChange(this, 'term');" />
 						</div>
@@ -297,6 +302,7 @@
 							</label>
 							<input
 								type="text"
+								id="character"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 invalid:border-red-500 focus:ring-sky-500 focus:ring-1"
 								onkeyup="handleInputChange(this, 'character');"
 								pattern="^([A-Z*]|new)$" />
@@ -310,13 +316,14 @@
 							</label>
 							<input
 								type="text"
+								id="author"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
 								onkeyup="handleInputChange(this, 'author');" />
 						</div>
 
 						<div class="explore-date hidden mb-2">
 							<label
-								for="date"
+								for="date-picker"
 								class="text-blue-500 block after:content-['*'] after:text-red-500">
 								date
 							</label>
@@ -333,7 +340,7 @@
 								type="checkbox"
 								id="strict"
 								name="checkbox"
-								class="align-middle"
+								class="align-middle ml-1"
 								onchange="handleInputChange(this, 'strict', true);" />
 						</div>
 
@@ -343,7 +350,7 @@
 								type="checkbox"
 								id="matchCase"
 								name="checkbox"
-								class="align-middle"
+								class="align-middle ml-1"
 								onchange="handleInputChange(this, 'matchCase', true);" />
 						</div>
 
@@ -351,6 +358,7 @@
 							<label for="limit" class="text-blue-500 block"> limit </label>
 							<input
 								type="number"
+								id="limit"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
 								onkeyup="handleInputChange(this, 'limit');"
 								min="1" />
@@ -360,6 +368,7 @@
 							<label for="page" class="text-blue-500 block"> page </label>
 							<input
 								type="number"
+								id="page"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
 								onkeyup="handleInputChange(this, 'page');"
 								min="1" />
@@ -371,6 +380,7 @@
 							</label>
 							<input
 								type="text"
+								id="multiPage"
 								class="border rounded-md px-2 py-1 w-full focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 invalid:border-red-500"
 								onkeyup="handleInputChange(this, 'multiPage');"
 								pattern="^\d+,\d+$" />
@@ -426,7 +436,9 @@
 			<p>&copy; 2023 Unofficial Urban Dictionary API</p>
 		</footer>
 
-		<script src="main.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/renderjson@1.4.0/renderjson.min.js"></script>
+		<script src="main.js" defer></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/renderjson@1.4.0/renderjson.min.js"
+			defer></script>
 	</body>
 </html>
