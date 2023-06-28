@@ -5,7 +5,9 @@
 	"main": "src/server.js",
 	"scripts": {
 		"start": "nodemon src/server.js",
-		"build": "webpack --config webpack.config.js"
+		"start-bundle": "node dist/bundle.js",
+		"build": "webpack --config webpack.config.js",
+		"test-build": "webpack --config webpack.config.js && node dist/bundle.js"
 	},
 	"author": "kashy",
 	"license": "ISC",
