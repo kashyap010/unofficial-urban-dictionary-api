@@ -23,7 +23,14 @@ module.exports = {
 		new CopyWebpackPlugin({
 			patterns: [
 				{ from: "views", to: "views" },
-				{ from: "public", to: "public" },
+				{
+					from: "public",
+					to: "public",
+					filter: (resourcePath) => {
+						// Exclude styles.css file from copying
+						return !resourcePath.includes("styles.css");
+					},
+				},
 			],
 		}),
 	],
