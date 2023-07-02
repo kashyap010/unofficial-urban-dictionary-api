@@ -7,7 +7,8 @@
 		"start": "nodemon src/server.js",
 		"start-bundle": "node dist/bundle.js",
 		"build": "webpack --config webpack.config.js",
-		"test-build": "webpack --config webpack.config.js && node dist/bundle.js"
+		"test-build": "webpack --config webpack.config.js && node dist/bundle.js",
+		"generate-css": "npx tailwindcss -i ./public/styles.css -o ./public/output.css --minify"
 	},
 	"author": "kashy",
 	"license": "ISC",
