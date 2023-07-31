@@ -6,6 +6,7 @@ const clipboardIconContainer = document.getElementById(
 	"clipboard-icon-container"
 );
 const jsonOutput = document.getElementById("json-output");
+const loader = document.getElementById("loader");
 
 const baseUrl = "https://unofficialurbandictionaryapi.com/api";
 const queryParams = {
@@ -160,4 +161,5 @@ endpoints.forEach((endpoint) => {
 
 document.addEventListener("DOMContentLoaded", () => {
 	datePicker.max = new Date().toISOString().split("T")[0];
+	loader.classList.add("hidden");
 });
