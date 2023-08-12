@@ -10,6 +10,10 @@ const {
 const errorHandler = require("../controllers/errorHandler");
 
 function setupRoutes(app) {
+	app.get("/sitemap.xml", (req, res) => {
+		res.sendFile(path.join(__dirname, "./views/sitemap.xml"));
+	});
+
 	app.get("/api", (req, res) => {
 		res.status(200).json({
 			statusCode: 200,
