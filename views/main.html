@@ -189,7 +189,7 @@
 		<div
 			class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
 			id="loader">
-			<img src="spinner.png" alt="Spinner png" />
+			<img src="spinner.gif" alt="Spinner png" />
 		</div>
 
 		<nav class="p-4 md:p-6">
@@ -257,7 +257,7 @@
 					<!-- Endpoints section -->
 					<section class="bg-white border rounded-lg p-4">
 						<h2
-							class="text-lg sm:text-xl font-semibold mb-2 flex justify-between items-center">
+							class="section-header flex justify-between items-center">
 							Endpoints
 							<span class="text-gray-300 right-0 text-xs sm:text-sm"
 								>Click on endpoint to switch</span
@@ -265,7 +265,7 @@
 						</h2>
 
 						<div class="endpoint">
-							<div class="endpoint-name cursor-pointer text-blue-500">
+							<div class="endpoint-name">
 								/search
 							</div>
 							<div class="endpoint-definition">
@@ -274,7 +274,7 @@
 						</div>
 
 						<div class="endpoint">
-							<div class="endpoint-name cursor-pointer text-blue-500">
+							<div class="endpoint-name">
 								/random
 							</div>
 							<div class="endpoint-definition">
@@ -283,7 +283,7 @@
 						</div>
 
 						<div class="endpoint">
-							<div class="endpoint-name cursor-pointer text-blue-500">
+							<div class="endpoint-name">
 								/browse
 							</div>
 							<div class="endpoint-definition">
@@ -292,7 +292,7 @@
 						</div>
 
 						<div class="endpoint">
-							<div class="endpoint-name cursor-pointer text-blue-500">
+							<div class="endpoint-name">
 								/author
 							</div>
 							<div class="endpoint-definition">
@@ -301,7 +301,7 @@
 						</div>
 
 						<div class="endpoint">
-							<div class="endpoint-name cursor-pointer text-blue-500">
+							<div class="endpoint-name">
 								/date
 							</div>
 							<div class="endpoint-definition">
@@ -312,7 +312,7 @@
 
 					<!-- Query Parameters section -->
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
-						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
+						<h2 class="section-header relative">
 							Query Parameters
 							<span
 								class="text-blue-500 absolute right-0 top-1/2 -translate-y-2/4 text-sm"
@@ -325,16 +325,16 @@
 							<div class="query-param-term">
 								<div>
 									<span
-										class="text-blue-500 after:content-['*'] after:text-red-500"
+										class="query-param-name"
 										>term</span
 									><span> - The term that you wish to search</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									words or phrases
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
+									class="query-param-example">
 									Eg. yeet, Weird flex but OK
 								</div>
 							</div>
@@ -342,12 +342,12 @@
 							<div class="query-param-author hidden">
 								<div>
 									<span
-										class="text-blue-500 after:content-['*'] after:text-red-500"
+										class="query-param-name"
 										>author</span
 									><span> - Name of the author</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
+									class="query-param-example">
 									Eg. The Onion, Aaron Peckham
 								</div>
 							</div>
@@ -355,12 +355,12 @@
 							<div class="query-param-date hidden">
 								<div>
 									<span
-										class="text-blue-500 after:content-['*'] after:text-red-500"
+										class="query-param-name"
 										>date</span
 									><span> - Date you wish to search for</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									yyyy-mm-dd
 								</div>
 							</div>
@@ -368,12 +368,12 @@
 							<div class="query-param-character hidden">
 								<div>
 									<span
-										class="text-blue-500 after:content-['*'] after:text-red-500"
+										class="query-param-name"
 										>character</span
 									><span> - character you wish to search for</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									A-Z, *, or "new"
 								</div>
 							</div>
@@ -384,11 +384,11 @@
 									><span> - Whether to return only exact matches</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									true, false (default)
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
+									class="query-param-example">
 									Eg. return only "bigger" and not "biggering", "biggered"
 								</div>
 							</div>
@@ -401,11 +401,11 @@
 									>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									values > 0
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
+									class="query-param-example">
 									Eg. limit = 6, only 6 definitions will be returned
 								</div>
 							</div>
@@ -416,11 +416,11 @@
 									><span> - Toggle case-sensitive matching</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									true, false (default)
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
+									class="query-param-example">
 									Eg. whether to return "hello" or "hEllO"
 								</div>
 							</div>
@@ -431,11 +431,11 @@
 									><span> - Get definitions from a particular page</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									values > 1
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
+									class="query-param-example">
 									Eg. page = 5, get all definitions from the 5th page only
 								</div>
 							</div>
@@ -446,11 +446,11 @@
 									><span> - Get definitions from a given range of pages</span>
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-teal-200 rounded-md mr-1">
+									class="query-param-summary">
 									false or 'min,max'
 								</div>
 								<div
-									class="text-sm inline-block py-0.5 px-1 bg-yellow-200 rounded-md">
+									class="query-param-example">
 									Eg. '2,4' will return all definitions from page 2 to page 4
 								</div>
 							</div>
@@ -462,12 +462,12 @@
 					class="grid grid-cols-1 gap-x-3 md:grid-cols-[auto_70%] md:grid-rows-[auto_1fr] md:gap-y-4 mt-4">
 					<!-- Explore section -->
 					<section class="bg-white border rounded-lg p-4 row-span-full">
-						<h2 class="text-lg sm:text-xl font-semibold mb-2">Explore</h2>
+						<h2 class="section-header">Explore</h2>
 
 						<div class="explore-term mb-2">
 							<label
 								for="term"
-								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								class="block query-param-name">
 								term
 							</label>
 							<input
@@ -480,7 +480,7 @@
 						<div class="explore-character hidden mb-2">
 							<label
 								for="character"
-								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								class="block query-param-name">
 								character
 							</label>
 							<input
@@ -494,7 +494,7 @@
 						<div class="explore-author hidden mb-2">
 							<label
 								for="author"
-								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								class="block query-param-name">
 								author
 							</label>
 							<input
@@ -507,7 +507,7 @@
 						<div class="explore-date hidden mb-2">
 							<label
 								for="date-picker"
-								class="text-blue-500 block after:content-['*'] after:text-red-500">
+								class="block query-param-name">
 								date
 							</label>
 							<input
@@ -572,7 +572,7 @@
 
 					<!-- Generated URL section -->
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
-						<h2 class="text-lg sm:text-xl font-semibold mb-2 relative">
+						<h2 class="section-header relative">
 							Generated URL
 							<span
 								class="absolute right-0 mr-1 cursor-pointer text-blue-300"
@@ -597,7 +597,7 @@
 
 					<!-- Response section -->
 					<section class="bg-white border rounded-lg p-4 mt-4 md:mt-0">
-						<h2 class="text-lg sm:text-xl font-semibold mb-2">Response</h2>
+						<h2 class="section-header">Response</h2>
 						<div id="json-output" class="bg-[#282a36] text-[#ccc]"></div>
 					</section>
 				</div>
@@ -606,7 +606,7 @@
 
 		<div class="bg-gray-100 px-4 pb-2">
 			<section class="bg-white p-4 container mx-auto w-full sm:max-w-[85%] md:max-w-[90%] border rounded-lg">
-				<h2 class="text-lg sm:text-xl font-semibold mb-2 text-center">FAQ</h2>
+				<h2 class="section-header text-center">FAQ</h2>
 
 				<div class="w-full md:w-1/2 mx-auto flex flex-col items-center justify-center">
 					<details class="w-full">
