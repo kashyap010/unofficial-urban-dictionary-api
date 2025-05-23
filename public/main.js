@@ -54,7 +54,11 @@ function buildQueryParamString(path) {
 	}
 
 	for (let [key, value] of Object.entries(queryParams)) {
-		if (["term", "date", "character", "author"].includes(key)) continue;
+		if (
+			["term", "date", "character", "author"].includes(key) ||
+			value === defaultQueryParams[key]
+		)
+			continue;
 
 		if (value === "") value = defaultQueryParams[key];
 
@@ -89,9 +93,21 @@ function hideExploreElements(list) {
 	});
 }
 
+function showExploreElements(list) {
+	list.forEach((elem) => {
+		document.querySelector(`.explore-${elem}`).classList.remove("hidden");
+	});
+}
+
 function hideQueryParamElements(list) {
 	list.forEach((elem) => {
 		document.querySelector(`.query-param-${elem}`).classList.add("hidden");
+	});
+}
+
+function showQueryParamElements(list) {
+	list.forEach((elem) => {
+		document.querySelector(`.query-param-${elem}`).classList.remove("hidden");
 	});
 }
 
@@ -116,30 +132,48 @@ function changeQueryParamsLayout(path) {
 			]);
 			break;
 		case "/search":
-			document.querySelector(".query-param-term").classList.remove("hidden");
+			showQueryParamElements(["term", "strict", "matchCase"]);
 			hideQueryParamElements(["author", "date", "character"]);
-			document.querySelector(".explore-term").classList.remove("hidden");
+			showExploreElements(["term", "strict", "matchCase"]);
 			hideExploreElements(["author", "date", "character"]);
 			break;
 		case "/browse":
 			document
 				.querySelector(".query-param-character")
 				.classList.remove("hidden");
-			hideQueryParamElements(["author", "date", "term"]);
+			hideQueryParamElements(["author", "date", "term", "strict", "matchCase"]);
 			document.querySelector(".explore-character").classList.remove("hidden");
-			hideExploreElements(["author", "date", "term"]);
+			hideExploreElements(["author", "date", "term", "strict", "matchCase"]);
 			break;
 		case "/author":
 			document.querySelector(".query-param-author").classList.remove("hidden");
-			hideQueryParamElements(["term", "date", "character"]);
+			hideQueryParamElements([
+				"term",
+				"date",
+				"character",
+				"strict",
+				"matchCase",
+			]);
 			document.querySelector(".explore-author").classList.remove("hidden");
-			hideExploreElements(["term", "date", "character"]);
+			hideExploreElements(["term", "date", "character", "strict", "matchCase"]);
 			break;
 		case "/date":
 			document.querySelector(".query-param-date").classList.remove("hidden");
-			hideQueryParamElements(["author", "term", "character"]);
+			hideQueryParamElements([
+				"author",
+				"term",
+				"character",
+				"strict",
+				"matchCase",
+			]);
 			document.querySelector(".explore-date").classList.remove("hidden");
-			hideExploreElements(["author", "term", "character"]);
+			hideExploreElements([
+				"author",
+				"term",
+				"character",
+				"strict",
+				"matchCase",
+			]);
 			break;
 	}
 }
