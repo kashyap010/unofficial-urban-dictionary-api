@@ -1,7 +1,10 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const cors = require('cors');
 const setupRoutes = require("./routes");
+
+app.use(cors());
 
 app.use(express.static("public"));
 
