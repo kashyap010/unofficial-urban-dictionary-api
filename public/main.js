@@ -7,6 +7,7 @@ const clipboardIconContainer = document.getElementById(
 );
 const jsonOutput = document.getElementById("json-output");
 const loader = document.getElementById("loader");
+const term = document.getElementById("term");
 
 const baseUrl = "https://unofficialurbandictionaryapi.com/api";
 const queryParams = {
@@ -25,10 +26,8 @@ const defaultQueryParams = JSON.parse(JSON.stringify(queryParams));
 async function fetchMeaning() {
 	jsonOutput.innerHTML = "";
 	const url = generatedUrl.innerText;
-	console.log(url);
 	const response = await fetch(url);
 	const data = await response.json();
-	console.log(data);
 	renderjson.set_show_to_level(1);
 	jsonOutput.appendChild(renderjson(data));
 }
@@ -182,6 +181,16 @@ function changeGeneratedUrl(path, queryParams = "") {
 	generatedUrl.innerText = baseUrl + path + queryParams;
 }
 
+function handleSearchTerm(searchTerm) {
+	if (!searchTerm) return;
+	
+	term.value = searchTerm;
+	queryParams.term = searchTerm;
+	const path = "/search";
+	changeGeneratedUrl(path, buildQueryParamString(path));
+	this.fetchMeaning().catch(console.error);
+}
+
 endpoints.forEach((endpoint) => {
 	endpoint.addEventListener("click", function (e) {
 		const path = e.target.innerText;
@@ -196,4 +205,9 @@ endpoints.forEach((endpoint) => {
 document.addEventListener("DOMContentLoaded", () => {
 	datePicker.max = new Date().toISOString().split("T")[0];
 	loader.classList.add("hidden");
+
+	const urlQueryString = window.location.search;
+	const urlParams = new URLSearchParams(urlQueryString);
+	const searchTerm = urlParams.get('term'); 
+	this.handleSearchTerm(searchTerm);
 });

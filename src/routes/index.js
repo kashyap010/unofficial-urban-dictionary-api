@@ -22,7 +22,7 @@ function setupRoutes(app) {
 		});
 	});
 
-	app.get("/", (req, res) => {
+	app.get(["/", "/search"], (req, res) => {
 		res.sendFile(path.join(__dirname, "./views/main.html"));
 	});
 
