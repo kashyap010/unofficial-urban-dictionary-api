@@ -77,6 +77,94 @@
 				}
 			}
 		</script>
+		<script type="application/ld+json">
+		{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		"mainEntity": [
+			{
+			"@type": "Question",
+			"name": "What is Urban Dictionary?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Urban Dictionary is a crowdsourced online dictionary where anyone can define slang words, wild phrases, and things your grandma probably shouldn't read. Think of it as the people's dictionary — unfiltered, hilarious, and sometimes horrifying."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "Why is Urban Dictionary so popular?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Because the internet is full of witty weirdos. Seriously though — it's relatable, raw, and refreshingly real. Users love the humor, creativity, and pure chaos of community-contributed definitions."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "What is (Unofficial) Urban Dictionary API?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "It's the best open-source REST API for Urban Dictionary content. Totally unofficial, proudly community-built, and designed to help you fetch slang terms, search definitions, or grab random nonsense — programmatically."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "Is this API affiliated with Urban Dictionary?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Nope. Not at all. This is an independent project built by a developer who thought, “What if we could get Urban Dictionary data without scraping it every time?” Then promptly built something that... scrapes it every time."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "What tech stack is used to build this?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "The backend is built with Express.js (Node.js), and the frontend is just good ol' HTML with Tailwind CSS — lightweight, functional, and kind of cute."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "Is the Urban Dictionary API free to use?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Yes! As long as this project is alive and kicking (and not on fire), it's 100% free. No credit card. No sign-up. No rate limits. Just raw slang."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "Are there rate limits on the API?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "None. Zero. Zilch. But hey, don't go building Skynet with it."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "Is the project open source?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Absolutely. You can inspect it, fork it, star it, clone it, or just stare at the repo wondering how it works. It's on GitHub for all to see."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "How can I contribute to the project?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Head over to the GitHub repo and open an issue, submit a PR, or drop a joke in the README. Contributions (and memes) are always welcome."
+			}
+			},
+			{
+			"@type": "Question",
+			"name": "What can I use this API for?",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "Whatever you want! Build a meme bot, a Slack app, a random slang generator for your resume — go wild. Just don't use it to explain slang to your boss. That won't end well."
+			}
+			}
+		]
+		}
+		</script>
 
 		<title>(Unofficial) Urban Dictionary API</title>
 
@@ -138,7 +226,7 @@
 		<hr class="w-3/4 md:w-3/5 mx-auto" />
 
 		<div class="bg-gray-100 pb-0 pt-4 px-4">
-			<h1
+			<p
 				class="bg-white p-4 container mx-auto w-full sm:max-w-[85%] md:max-w-[90%] border rounded-lg">
 				This is an Unofficial API of the
 				<a
@@ -160,7 +248,7 @@
 					class="text-blue-600"
 					>on the Github repo.</a
 				>!
-			</h1>
+			</p>
 		</div>
 
 		<div class="bg-gray-100 p-4">
@@ -514,6 +602,123 @@
 					</section>
 				</div>
 			</div>
+		</div>
+
+		<div class="bg-gray-100 px-4 pb-2">
+			<section class="bg-white p-4 container mx-auto w-full sm:max-w-[85%] md:max-w-[90%] border rounded-lg">
+				<h2 class="text-lg sm:text-xl font-semibold mb-2 text-center">FAQ</h2>
+
+				<div class="w-full md:w-1/2 mx-auto flex flex-col items-center justify-center">
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">What is Urban Dictionary?</h3>
+						</summary>
+						<p class="mt-2">
+							Urban Dictionary is a crowdsourced online dictionary where anyone can define slang words, wild phrases, and things your grandma probably shouldn't read. Think of it as the people's dictionary — unfiltered, hilarious, and sometimes horrifying.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">Why is Urban Dictionary so popular?</h3>
+						</summary>
+						<p class="mt-2">
+							Because the internet is full of witty weirdos. Seriously though — it's relatable, raw, and refreshingly real. Users love the humor, creativity, and pure chaos of community-contributed definitions.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">What is (Unofficial) Urban Dictionary API?</h3>
+						</summary>
+						<p class="mt-2">
+							It's the best open-source REST API for Urban Dictionary content. Totally unofficial, proudly community-built, and designed to help you fetch slang terms, search definitions, or grab random nonsense — programmatically.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">Is this API affiliated with Urban Dictionary?</h3>
+						</summary>
+						<p class="mt-2">
+							Nope. Not at all. This is an independent project built by a developer who thought, “What if we could get Urban Dictionary data without scraping it every time?” Then promptly built something that... scrapes it every time.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">What tech stack is used to build this?</h3>
+						</summary>
+						<p class="mt-2">
+							The backend is built with Express.js (Node.js), and the frontend is just good ol' HTML with Tailwind CSS — lightweight, functional, and kind of cute.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">Is the Urban Dictionary API free to use?</h3>
+						</summary>
+						<p class="mt-2">
+							Yes! As long as this project is alive and kicking (and not on fire), it's 100% free. No credit card. No sign-up. No rate limits. Just raw slang.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">Are there rate limits on the API?</h3>
+						</summary>
+						<p class="mt-2">
+							None. Zero. Zilch. But hey, don't go building Skynet with it.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">Is the project open source?</h3>
+						</summary>
+						<p class="mt-2">
+							Absolutely. You can inspect it, fork it, star it, clone it, or just stare at the repo wondering how it works. It's on GitHub for all to see.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">How can I contribute to the project?</h3>
+						</summary>
+						<p class="mt-2">
+							Head over to the GitHub repo and open an issue, submit a PR, or drop a joke in the README. Contributions (and memes) are always welcome.
+						</p>
+					</details>
+					
+					<hr class="w-full mx-auto my-2" />
+
+					<details class="w-full">
+						<summary class="faq-summary">
+							<span>Q: </span> <h3 class="ml-2">What can I use this API for?</h3>
+						</summary>
+						<p class="mt-2">
+							Whatever you want! Build a meme bot, a Slack app, a random slang generator for your resume — go wild. Just don't use it to explain slang to your boss. That won't end well.
+						</p>
+					</details>
+				</div>
+				
+			</section>
 		</div>
 
 		<footer class="text-center p-4">

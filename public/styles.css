@@ -6,3 +6,7 @@ pre {
 	overflow: scroll;
 	padding: 0.375rem;
 }
+
+.faq-summary {
+	@apply cursor-pointer flex items-start font-semibold text-left;
+}
