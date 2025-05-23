@@ -28,7 +28,7 @@ async function scraper(
 	} = {}
 ) {
 	try {
-		const baseUrl = "https://www.urbandictionary.com/";
+		const baseUrl = "https://www.urbandictionary.com";
 		let fixedUrl = `${baseUrl}/${path}`;
 		if (scrapeType === "search") fixedUrl += term ? `?term=${term}` : "";
 		else if (scrapeType === "browse")
