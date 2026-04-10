@@ -1,14 +1,52 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const puppeteer = require("puppeteer");
 const { getPreviousDate } = require("../utils/dateUtils");
 
+// Helper function to parse numbers that might contain commas
+function parseNumber(str) {
+	return Number(str.replace(/,/g, "")) || 0;
+}
+
+// Fetch page using persistent Puppeteer browser session
+async function fetchWithPuppeteer(url, browser = null) {
+	let shouldCloseBrowser = false;
+	try {
+		if (!browser) {
+			browser = await puppeteer.launch({
+				headless: "new",
+				args: ["--no-sandbox", "--disable-setuid-sandbox"],
+			});
+			shouldCloseBrowser = true;
+		}
+		const page = await browser.newPage();
+		await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
+		const html = await page.content();
+		await page.close();
+		
+		if (shouldCloseBrowser) {
+			await browser.close();
+		}
+		return html;
+	} catch (e) {
+		if (shouldCloseBrowser && browser) await browser.close();
+		throw e;
+	}
+}
+
 function extractDetails($, el) {
+	const upvotes = $(el).find('[data-x-text="upCount"]').first().text().trim();
+	const downvotes = $(el).find('[data-x-text="downCount"]').first().text().trim();
+
 	return {
 		word: $(el).find(".word").prop("innerText"),
 		meaning: $(el).find(".meaning").prop("innerText"),
 		example: $(el).find(".example").prop("innerText"),
 		contributor: $(el).find(".contributor a").prop("innerText"),
 		date: $(el).find(".contributor").contents()[2].data.trim(),
+		thumbs_up: parseNumber(upvotes),
+		thumbs_down: parseNumber(downvotes),
+		score: parseNumber(upvotes) - parseNumber(downvotes),
 	};
 }
 
@@ -38,7 +76,17 @@ async function scraper(
 		else if (scrapeType === "author") fixedUrl += `?author=${author}`;
 		else if (scrapeType === "date") fixedUrl += `?date=${date}`;
 
-		let { data: html } = await axios.get(fixedUrl, { validateStatus: false });
+		// Use Puppeteer to render JavaScript (for vote counts)
+		let html;
+		let isFirstPage = true;
+		try {
+			html = await fetchWithPuppeteer(fixedUrl);
+		} catch (puppeteerError) {
+			const { data } = await axios.get(fixedUrl, { validateStatus: false });
+			html = data;
+			isFirstPage = false;
+		}
+		
 		let $ = cheerio.load(html);
 
 		if (scrapeType === "search" && !$(".definition").length)
@@ -62,10 +110,8 @@ async function scraper(
 					? [page, page].map((i) => parseInt(i))
 					: multiPage.split("-").map((i) => parseInt(i)); // single page : override
 		} else {
-			[currentPage, maxPage] =
-				multiPage === "false"
-					? [1, 5]
-					: multiPage.split("-").map((i) => parseInt(i)); // default 5 pages : user entered pages
+
+			[currentPage, maxPage] = [1, 1]; 
 		}
 
 		const $last = $("div[aria-label='Pagination'] a[aria-label='Last page']");
@@ -88,7 +134,12 @@ async function scraper(
 				else if (scrapeType === "date") url += `?date=${date}`;
 				url += `&page=${currentPage}`;
 
-				({ data: html } = await axios.get(url, { validateStatus: false }));
+				try {
+					html = await fetchWithPuppeteer(url);
+				} catch (puppeteerError) {
+					const { data } = await axios.get(url, { validateStatus: false });
+					html = data;
+				}
 				$ = cheerio.load(html);
 			}
 
