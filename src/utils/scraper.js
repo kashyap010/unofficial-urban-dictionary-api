@@ -3,12 +3,19 @@ const cheerio = require("cheerio");
 const { getPreviousDate } = require("../utils/dateUtils");
 
 function extractDetails($, el) {
+	const $contributor = $(el).find(".contributor");
+	const links = $contributor.find("a");
+	const authorLink = links.length > 1 ? $(links[1]) : $(links[0]);
+	const lastTextNode = $contributor.contents().filter(function () {
+		return this.type === "text" && this.data.trim().length > 0;
+	}).last();
+
 	return {
 		word: $(el).find(".word").prop("innerText"),
 		meaning: $(el).find(".meaning").prop("innerText"),
 		example: $(el).find(".example").prop("innerText"),
-		contributor: $(el).find(".contributor a").prop("innerText"),
-		date: $(el).find(".contributor").contents()[2].data.trim(),
+		contributor: authorLink.prop("innerText") || "",
+		date: lastTextNode.length ? lastTextNode[0].data.trim() : "",
 	};
 }
 
