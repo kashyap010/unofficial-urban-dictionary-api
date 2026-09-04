@@ -11,6 +11,10 @@ app.use(compression())
 
 app.use(express.static("public"));
 
+app.get("/health", (req, res) => {
+	res.status(200).send("OK");
+});
+
 setupRoutes(app);
 
 const PORT = process.env.PORT || 8080;
